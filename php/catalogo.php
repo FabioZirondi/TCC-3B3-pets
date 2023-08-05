@@ -5,20 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="../css/HomePage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Montserrat:wght@100;200&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../css/cadastro.css">
-    <link rel="stylesheet" href="../css/HomePage.css">
-    <title>Página Inicia</title>
+    <title>Página Inicial</title>
 </head>
 
 <body>
     <header>
-        <!-- NavBar -->
         <div class="topnav" id="myTopnav">
             <a href="../php/HomePage.php" class="active">I-Pet</a>
             <a href="../php/login.php"> <button class="button" type="button">Login</button></a>
@@ -29,46 +26,12 @@
         </div>
     </header>
     <main>
+        </br>
+        </br>
+        </br>
+        <h1> Cadastro realizado</h1>
 
-        <!-- parte principal -->
-
-        <div class="container-geral">
-
-            <!-- Imagem -->
-
-            <div class="img-form">
-                <div class="cadastrese">
-                    <h1>Login</h1>
-                    <p>oi, teste login </p>
-                </div>
-            </div>
-
-            <!-- Formulário -->
-
-            <div class="form">
-                <form class="container-form" action="../php/logar.php" method="POST">
-                    <h1>Login</h1>
-                    <p>Faça login para acessar os agendamentos</p>
-                    <hr>
-
-                    <label for="email"><b>Email</b></label>
-                    <input type="text" placeholder="Enter Email" name="email" id="email" required>
-
-                    <label for="psw"><b>Senha</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-
-                    <hr>
-                    <p>Ainda não tem conta? <a href="../php/cadastrohtml.php">Cadastre-se</a>.</p>
-
-                    <button type="submit" class="registerbtn">Enviar</button>
-                </form>
-            </div>
-        </div>
-        </div>
     </main>
-
-    <!-- Rodapé -->
-
     <footer>
         <h1>I-Pet</h1>
         <p>I-pet@gmail.com</p>

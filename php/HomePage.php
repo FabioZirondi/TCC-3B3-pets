@@ -11,13 +11,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Montserrat:wght@100;200&display=swap"
         rel="stylesheet">
-    <title>Página Inicia</title>
+    <title>Página Inicial</title>
 </head>
 
 <body>
     <header>
         <div class="topnav" id="myTopnav">
-            <a href="#home" class="active">I-Pet</a>
+            <a href="../php/HomePage.php" class="active">I-Pet</a>
             <a href="../php/login.php"> <button class="button" type="button">Login</button></a>
             <a href="#sobre">Sobre</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -34,7 +34,7 @@
                 <h1 class="text_main">Bem-Vindo!</h1>
                 <p class="text_main">Nosso site foi desenvolvido para facilitar agendamentos de serviços para seu Pet.
                 </p>
-                <a href="./cadastro.html"><button class="button_main text_main" type="submit">Inscreva-se</button></a>
+                <a href="../php/cadastrohtml.php"><button class="button_main text_main" type="submit">Inscreva-se</button></a>
             </div>
         </div>
 

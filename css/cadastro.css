@@ -130,6 +130,7 @@ a {
   .img-form {
     border-style: none none solid none;
     border-radius: 0px;
+    max-width: 100%;
   }
 
   .cadastrese {

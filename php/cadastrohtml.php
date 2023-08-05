@@ -20,7 +20,7 @@
     <header>
         <!-- NavBar -->
         <div class="topnav" id="myTopnav">
-            <a href="./HomePage.html" class="active">I-Pet</a>
+            <a href="../php/HomePage.php" class="active">I-Pet</a>
             <a href="../php/login.php"> <button class="button" type="button">Login</button></a>
             <a href="#sobre">Sobre</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -46,23 +46,27 @@
             <!-- Formulário -->
 
             <div class="form">
-                <form class="container-form" action="/action_page.php">
+                <form class="container-form" method="POST" action="../php/cadastro.php">
                     <h1>Cadastro</h1>
                     <p>Faça seu cadastro para acessar mais informações</p>
                     <hr>
 
+                    <label for="nome"><b>Nome</b></label>
+                    <input type="text" placeholder="Enter Email" name="nome" id="nome" required>
+
                     <label for="email"><b>Email</b></label>
                     <input type="text" placeholder="Enter Email" name="email" id="email" required>
 
-                    <label for="psw"><b>Senha</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+                    <label for="senha"><b>Senha</b></label>
+                    <input type="password" placeholder="Enter Senha" name="senha" id="senha" required>
 
-                    <label for="psw-repeat"><b>Respita a senha</b></label>
-                    <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+
                     <hr>
-                    <p>já possuí conta? <a href="../php/login.php">Login</a>.</p>
 
                     <button type="submit" class="registerbtn">Register</button>
+
+                    <p>já possuí conta? <a href="../php/login.php">Login</a>.</p>
+
                 </form>
             </div>
         </div>

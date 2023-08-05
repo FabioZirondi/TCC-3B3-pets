@@ -1,0 +1,153 @@
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.container-geral {
+  padding-top: 100px;
+  padding-bottom: 60px;
+  display: flex;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-items: stretch;
+}
+
+/* Imagem */
+.img-form {
+  background-image: url(../img/imgDog.jpg);
+  background-size: cover;
+  background-position: center;
+  min-width: 400px;
+  color: aliceblue;
+  border: 3px solid #000;
+  border-radius: 50px 0px 0px 50px;
+}
+
+.cadastrese {
+  margin-top: 50%;
+  justify-content: center;
+  text-align: center;
+}
+
+/* FormulÃ¡rio */
+.container-form {
+  padding: 30px;
+  background-color: white;
+  max-width: 300px;
+  border-style: solid solid solid none;
+  padding-right: 70px;
+  border-radius: 0px 50px 50px 0px;
+}
+
+.form {
+  background-color: #ffffff;
+  border-radius: 20px;
+}
+
+input[type=text],
+input[type=password] {
+  width: 90%;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  border: solid 1px black;
+}
+
+input[type=text]:hover,
+input[type=password]:hover {
+  border: solid 3px black;
+}
+
+input[type=text]:focus,
+input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+
+hr {
+  border: 1px solid #cecece;
+  margin-bottom: 25px;
+}
+
+.registerbtn {
+  background-color: #dbd8c3;
+  border-radius: 10px;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  background-color: #beb14e;
+}
+
+a {
+  color: dodgerblue;
+}
+
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+@media screen and (max-width: 900px) {
+  .container-geral {
+    padding-top: 40px;
+    flex-direction: column;
+  }
+
+  .container-form {
+    padding: 0px;
+    border-style: none none none none;
+  }
+
+  .form {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .img-form {
+    border-style: none none solid none;
+    border-radius: 0px;
+  }
+
+  .cadastrese {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  input[type=text]:hover,
+  input[type=password]:hover {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+
+  .registerbtn {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+}

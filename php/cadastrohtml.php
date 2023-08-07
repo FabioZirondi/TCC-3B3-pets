@@ -58,7 +58,7 @@
                     <input type="text" placeholder="Enter Email" name="email" id="email" required>
 
                     <label for="senha"><b>Senha</b></label>
-                    <input type="password" placeholder="Enter Senha" name="senha" id="senha" required>
+                    <input type="password" placeholder="Enter Senha" name="senha" id="senha" minlength="8">
 
 
                     <hr>

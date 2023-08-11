@@ -54,8 +54,8 @@
                     <label for="email"><b>Email</b></label>
                     <input type="text" placeholder="Enter Email" name="email" id="email" required>
 
-                    <label for="psw"><b>Senha</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+                    <label for="senha"><b>Senha</b></label>
+                    <input type="password" placeholder="Enter Password" name="senha" id="senha" required>
 
                     <hr>
                     <p>Ainda não tem conta? <a href="../php/cadastrohtml.php">Cadastre-se</a>.</p>

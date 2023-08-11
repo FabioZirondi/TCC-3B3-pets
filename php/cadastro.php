@@ -27,7 +27,9 @@ if (mysqli_num_rows($email_result) > 0) {
 }
 
 // Criação do hash da senha
-$senha_hash = password_hash($usersenha, PASSWORD_DEFAULT);
+$options = ['cost' => 10,];
+
+$senha_hash = password_hash($usersenha, PASSWORD_DEFAULT, $options);
 
 // Inserção do usuário no banco de dados
 $stmt = "INSERT INTO usuario (nome, email, senha) VALUES ('$nome', '$email', '$senha_hash')";

@@ -1,3 +1,9 @@
+<?php
+
+include_once("../php/verifca.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 

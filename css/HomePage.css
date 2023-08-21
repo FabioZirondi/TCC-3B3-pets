@@ -1,3 +1,4 @@
+
 body {
     margin: 0;
     font-family: 'Dosis', sans-serif;
@@ -227,6 +228,9 @@ footer {
     justify-content: center;
     text-align: center;
     background-color: #f5f5f5;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
 }
 
 .social-icons {
@@ -236,4 +240,11 @@ footer {
 .social-icons img {
     width: 24px;
     margin: 0 5px;
+}
+
+@media screen and (max-width: 900px) {
+    footer {
+        position: static !important;
+        bottom: none;
+    }
 }

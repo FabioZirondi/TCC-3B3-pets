@@ -34,8 +34,11 @@ $senha_hash = password_hash($usersenha, PASSWORD_DEFAULT, $options);
 // Inserção do usuário no banco de dados
 $stmt = "INSERT INTO usuario (nome, email, senha) VALUES ('$nome', '$email', '$senha_hash')";
 
+session_start();
 
 if (mysqli_query($conn, $stmt)) {
+    $_SESSION['usuario'] = $nome;
+
     header('Location: ../php/catalogo.php');
 } else {
     echo "Erro ao cadastrar-se <br>" . mysqli_error($conn);

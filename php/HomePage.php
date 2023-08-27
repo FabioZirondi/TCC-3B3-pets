@@ -1,3 +1,9 @@
+<?php
+
+include_once("../php/verificaSessionPagInicial.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 

@@ -1,6 +1,6 @@
 <?php
 
-include_once("../php/verifica.php");
+include_once("../php/verificaSession.php");
 
 ?>
 

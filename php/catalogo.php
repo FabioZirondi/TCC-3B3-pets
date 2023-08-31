@@ -15,8 +15,8 @@ include_once("../php/verificaSession.php");
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Montserrat:wght@100;200&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Montserrat:wght@100;200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/catalogo.css">
     <title>Página Inicial</title>
 </head>
 
@@ -35,7 +35,13 @@ include_once("../php/verificaSession.php");
         </br>
         </br>
         </br>
-        <h1> Cadastro realizado</h1>
+        <div class="card">
+            <img src="../img/servicobanho.jpg" alt="Denim Jeans" style="width:100%">
+            <h1>Tailored Jeans</h1>
+            <p class="price">$19.99</p>
+            <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.</p>
+            <p><button>Add to Cart</button></p>
+        </div>
 
     </main>
     <footer>

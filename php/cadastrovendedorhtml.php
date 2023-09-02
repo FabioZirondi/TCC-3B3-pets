@@ -52,46 +52,26 @@ include_once("../php/verificaSessionPagInicial.php");
             <!-- Formulário -->
 
             <div class="form">
-                <form class="container-form" method="POST" action="../php/cadastro.php">
-                    <h1>Cadastro</h1>
-                    <p>Faça seu cadastro para acessar mais informações</p>
+                <form class="container-form" method="POST" action="../php/cadastrovendedor.php">
+                    <h1>Adicione mais informações para vendedor</h1>
+                    <p>Bem-vindo!</p>
                     <hr>
 
-                    <label for="nome"><b>Nome</b></label>
-                    <input type="text" placeholder="Nome" name="nome" id="nome" required>
+                    <label for="telefone"><b>Telefone</b></label>
+                    <input type="text" id="telefone" name="numero" required
+                        placeholder="(xx) xxxxx-xxxx" required>
 
-                    <label for="email"><b>Email</b></label>
-                    <input type="text" placeholder="Email" name="email" id="email" required>
+                    <label for="nomeemp"><b>Nome da sua empresa</b></label>
+                    <input type="text" placeholder="Nome empresa" name="nomeemp" id="nomeemp" required>
 
-                    <label for="senha"><b>Senha</b></label>
-                    <input type="password" placeholder="Senha" name="senha" id="senha" minlength="8" required>
-
-                    <input class="checkbox" type="checkbox" id="vendedor" name="vendedor" value="v">
-                    <label for="">Cadastro para vendedores</label>
-                    <p></p>
-
-                    <div id="camposVendedor" style="display: none;">
-
-                        <label for="telefone"><b>Telefone</b></label>
-                        <input type="text" id="telefone" name="numero" placeholder="(xx) xxxxx-xxxx" >
-
-                        <label for="nomeemp"><b>Nome da sua empresa</b></label>
-                        <input type="text" placeholder="Nome empresa" name="nomeemp" id="nomeemp" >
-
-                        <label for="cnpj"><b>CNPJ</b></label>
-                        <input type="text" placeholder="CNPJ" placeholder="XX.XXX.XXX/0001-XX." name="cnpj" id="cnpj">
-                    </div>
+                    <label for="cnpj"><b>CNPJ</b></label>
+                    <input type="text" placeholder="CNPJ" placeholder="XX.XXX.XXX/0001-XX." name="cnpj" id="cnpj" required>
                     <hr>
+
                     <button type="submit" class="registerbtn">Register</button>
+
                     <p>já possuí conta? <a href="../php/login.php">Login</a>.</p>
                 </form>
-                <script>
-                    document.getElementById('vendedor').addEventListener('change', function () {
-                        var camposVendedor = document.getElementById('camposVendedor');
-                        camposVendedor.style.display = this.checked ? 'block' : 'none';
-                    });
-                </script>
-
             </div>
         </div>
         </div>

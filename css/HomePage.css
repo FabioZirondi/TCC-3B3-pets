@@ -188,6 +188,7 @@ body {
 
 .container_about {
     margin: 40px;
+    
 }
 
 .container_img_about {
@@ -222,14 +223,17 @@ body {
 /* footer */
 
 footer {
+    bottom: 0;
+    left: 0;
+    right: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     background-color: #f5f5f5;
-    bottom: 0px;
     width: 100%;
+    z-index: 999; /* Opcional: Adicione uma camada de z-index para garantir que o footer esteja sempre visível */
 }
 
 .social-icons {
@@ -243,7 +247,24 @@ footer {
 
 @media screen and (max-width: 900px) {
     footer {
-        position: static !important;
-        bottom: none;
+        bottom: 0;
     }
 }
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  main {
+    padding-top: 20px; /* Ajuste o valor conforme necessário */
+    flex: 1;
+  }
+  
+  footer {
+    margin-top: 20px; /* Ajuste o valor conforme necessário */
+  }
+  

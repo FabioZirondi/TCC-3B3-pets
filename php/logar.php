@@ -6,16 +6,36 @@ include_once('../php/conexao.php');
 
 $email = mysqli_real_escape_string($conn, $email);
 
-$stmtlogin = "SELECT * FROM usuario WHERE email = '$email'";
-$resultado = mysqli_query($conn, $stmtlogin);
+// Consulta nas tabelas 'usuario' e 'vendedor'
+$stmtlogin_usuario = "SELECT * FROM usuario WHERE email = '$email'";
+$stmtlogin_vendedor = "SELECT * FROM vendedor WHERE email = '$email'";
 
-if ($resultado) {
-    if (mysqli_num_rows($resultado) > 0) {
-        $row = mysqli_fetch_assoc($resultado);
+$resultado_usuario = mysqli_query($conn, $stmtlogin_usuario);
+$resultado_vendedor = mysqli_query($conn, $stmtlogin_vendedor);
+
+if ($resultado_usuario || $resultado_vendedor) {
+    // Verifica se encontrou um registro em alguma das tabelas
+    $usuario_encontrado = mysqli_num_rows($resultado_usuario) > 0;
+    $vendedor_encontrado = mysqli_num_rows($resultado_vendedor) > 0;
+
+    if ($usuario_encontrado || $vendedor_encontrado) {
+        if ($usuario_encontrado) {
+            $row = mysqli_fetch_assoc($resultado_usuario);
+        } else {
+            $row = mysqli_fetch_assoc($resultado_vendedor);
+        }
+
         if (password_verify($senhalogar, $row['senha'])) {
             session_start();
-            $_SESSION['usuario'] = $row['nome'];
-            header("Location: ../php/catalogo.php");
+
+            // Defina a variável de sessão 'usuario' com base no tipo encontrado
+            $_SESSION['usuario'] = $usuario_encontrado ? 'u' : 'v';
+
+            if ($_SESSION['usuario'] == "u") {
+                header("Location: ../php/catalogo.php");
+            } elseif ($_SESSION['usuario'] == "v") {
+                header("Location: ../php/telavendedor.php");
+            }
             exit;
         } else {
             echo "Senha incorreta";

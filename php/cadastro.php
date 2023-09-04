@@ -61,9 +61,13 @@ if ($tipo_usuario === 'v') {
 session_start();
 
 if (mysqli_query($conn, $stmt)) {
-    $_SESSION['usuario'] = $nome;
+    $_SESSION['usuario'] = $tipo_usuario;
 
-    header('Location: ../php/catalogo.php');
+    if ($_SESSION['usuario'] == "u") {
+        header("Location: ../php/catalogo.php");
+    } elseif ($_SESSION['usuario'] == "v") {
+        header("Location: ../php/telavendedor.php");
+    }
 } else {
     echo "Erro ao cadastrar-se <br>" . mysqli_error($conn);
     echo "<br><a href='../php/homepage.php'>Voltar</a>";

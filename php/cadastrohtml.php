@@ -61,7 +61,7 @@ include_once("../php/verificaSessionPagInicial.php");
                     <input type="text" placeholder="Nome" name="nome" id="nome" required>
 
                     <label for="email"><b>Email</b></label>
-                    <input type="text" placeholder="Email" name="email" id="email" required>
+                    <input type="email" placeholder="Email" name="email" id="email" required>
 
                     <label for="senha"><b>Senha</b></label>
                     <input type="password" placeholder="Senha" name="senha" id="senha" minlength="8" required>
@@ -76,7 +76,7 @@ include_once("../php/verificaSessionPagInicial.php");
                         <input type="text" id="telefone" name="numero" placeholder="(xx) xxxxx-xxxx" >
 
                         <label for="nomeemp"><b>Nome da sua empresa</b></label>
-                        <input type="text" placeholder="Nome empresa" name="nomeemp" id="nomeemp" >
+                        <input type="text" placeholder="Empresa" name="nomeemp" id="nomeemp" >
 
                         <label for="cnpj"><b>CNPJ</b></label>
                         <input type="text" placeholder="CNPJ" placeholder="XX.XXX.XXX/0001-XX." name="cnpj" id="cnpj">

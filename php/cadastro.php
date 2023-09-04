@@ -45,7 +45,6 @@ if ($tipo_usuario === 'v') {
         echo "Erro: Todos os campos obrigatórios para vendedores devem estar preenchidos.";
         exit;
     }
-
     // Inserção do vendedor no banco de dados
     $stmt = "INSERT INTO vendedor (nome, email, senha, telefone, nomeemp, cnpj, tipo) VALUES ('$nome', '$email', '$senha_hash', '$numero', '$nomeemp', '$cnpj', 'v')";
 } elseif ($tipo_usuario === 'u') {

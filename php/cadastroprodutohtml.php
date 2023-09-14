@@ -1,9 +1,8 @@
 <?php
 
-include_once("../php/verificaSessionPagInicial.php");
+include_once("../php/sessionvendedor.php");
 
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -11,20 +10,18 @@ include_once("../php/verificaSessionPagInicial.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="../css/HomePage.css">
+    <link rel="stylesheet" href="../css/cadastroprodutos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Montserrat:wght@100;200&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../css/cadastro.css">
-    <link rel="stylesheet" href="../css/HomePage.css">
-    <title>Login</title>
+    <title>Página Inicial</title>
 </head>
 
 <body>
     <header>
-        <!-- NavBar -->
         <div class="topnav" id="myTopnav">
             <a href="../php/HomePage.php" class="active">I-Pet</a>
             <a href="../php/login.php"> <button class="button" type="button">Login</button></a>
@@ -35,46 +32,29 @@ include_once("../php/verificaSessionPagInicial.php");
         </div>
     </header>
     <main>
+        <br/>
+        <br/>
+        <div class="form">
+            <form class="container-form" action="../php/logar.php" method="POST">
+                <h1>Cadastro de produtos</h1>
+        
+                <hr>
 
-        <!-- parte principal -->
+                <label for="title"><b>Título</b></label>
+                <input type="text" placeholder="Título do produto" name="title" id="title" required>
 
-        <div class="container-geral">
+                <label for="senha"><b>Descrição</b></label>
+                <input type="text" placeholder="Descrição" name="desc" id="desc" required>
 
-            <!-- Imagem -->
+                <label for="preco"><b>Preço</b></label>
+                <input type="text" placeholder="Preço" name="preco" id="preco" required>
 
-            <div class="img-form">
-                <div class="cadastrese">
-                    <h1>Login</h1>
-                    <p>oi, teste login </p>
-                </div>
-            </div>
+                <button type="submit" class="registerbtn">Enviar</button>
 
-            <!-- Formulário -->
+            </form>
 
-            <div class="form">
-                <form class="container-form" action="../php/logar.php" method="POST">
-                    <h1>Login</h1>
-                    <p>Faça login para acessar os agendamentos</p>
-                    <hr>
 
-                    <label for="email"><b>Email</b></label>
-                    <input type="email" placeholder="Enter Email" name="email" id="email" required>
-
-                    <label for="senha"><b>Senha</b></label>
-                    <input type="password" placeholder="Enter Password" name="senha" id="senha" required>
-
-                    <hr>
-                    <p>Ainda não tem conta? <a href="../php/cadastrohtml.php">Cadastre-se</a>.</p>
-
-                    <button type="submit" class="registerbtn">Enviar</button>
-                </form>
-            </div>
-        </div>
-        </div>
     </main>
-
-    <!-- Rodapé -->
-
     <footer>
         <h1>I-Pet</h1>
         <p>I-pet@gmail.com</p>

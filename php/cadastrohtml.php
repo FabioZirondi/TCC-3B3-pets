@@ -19,7 +19,7 @@ include_once("../php/verificaSessionPagInicial.php");
         rel="stylesheet">
     <link rel="stylesheet" href="../css/cadastro.css">
     <link rel="stylesheet" href="../css/HomePage.css">
-    <title>Página Inicia</title>
+    <title>Cadastre-se</title>
 </head>
 
 <body>

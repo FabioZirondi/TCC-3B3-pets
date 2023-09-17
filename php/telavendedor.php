@@ -23,7 +23,7 @@ include_once("../php/sessionvendedor.php");
         <div class="topnav" id="myTopnav">
             <a href="../php/HomePage.php" class="active">I-Pet</a>
             <a href="../php/login.php"> <button class="button" type="button">Login</button></a>
-            <a href="../php/cadastroprodutos.php">Produtos</a>
+            <a href="../php/cadastroprodutohtml.php">Produtos</a>
             <a href="#sobre">Sobre</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <i class="fa fa-bars"></i>

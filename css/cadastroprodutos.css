@@ -19,12 +19,12 @@ h1 {
 }
 
 .container-form {
-    max-width: 500px; 
+    max-width: 400px; 
     margin: 0 auto; 
 }
 
 hr {
-    width: 500px; 
+    width: 400px; 
     margin: 20px 0;
 }
 
@@ -120,7 +120,6 @@ hr {
       justify-content: center;
       display: flex;
       flex-direction: column;
-      text-align: center;
     }
   
     .img-form {
@@ -128,11 +127,6 @@ hr {
       max-width: 100%;
     }
   
-    .cadastrese {
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
   
     input[type=text]:hover,
     input[type=password]:hover {

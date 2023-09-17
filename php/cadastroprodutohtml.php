@@ -32,26 +32,28 @@ include_once("../php/sessionvendedor.php");
         </div>
     </header>
     <main>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <div class="form">
-            <form class="container-form" action="../php/logar.php" method="POST">
-                <h1>Cadastro de produtos</h1>
-        
-                <hr>
+        <form class="container-form" action="../php/cadastroproduto.php" method="POST" enctype="multipart/form-data">
+    <h1>Cadastro de produtos</h1>
+    <hr>
 
-                <label for="title"><b>Título</b></label>
-                <input type="text" placeholder="Título do produto" name="title" id="title" required>
+    <label for="nomeprod"><b>Título</b></label>
+    <input type="text" placeholder="Título do produto" name="nomeprod" id="nomeprod" required>
 
-                <label for="senha"><b>Descrição</b></label>
-                <input type="text" placeholder="Descrição" name="desc" id="desc" required>
+    <label for="desc"><b>Descrição</b></label>
+    <input type="text" placeholder="Descrição" name="desc" id="desc" required>
 
-                <label for="preco"><b>Preço</b></label>
-                <input type="text" placeholder="Preço" name="preco" id="preco" required>
+    <label for="preco"><b>Preço</b></label>
+    <input type="text" placeholder="Preço" name="preco" id="preco" required>
+    
+    <label for="imagem"><b>Imagem</b></label>
+    <input type="file" name="imagem" id="imagem" accept="image/*" required>
 
-                <button type="submit" class="registerbtn">Enviar</button>
+    <button type="submit" class="registerbtn">Enviar</button>
+</form>
 
-            </form>
 
 
     </main>

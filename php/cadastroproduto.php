@@ -32,14 +32,28 @@ $tamanho_imagem = $_FILES['imagem']['size'];
 
 // Verifica o tipo de arquivo
 if (!in_array($tipo_imagem, $tipo_permitido)) {
-    echo "Erro: Tipo de arquivo não permitido.";
+    $erro = "Erro: Tipo de arquivo não permitido.";
+    if (isset($erro)) {
+        header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
+        exit;
+    }
 } elseif ($tamanho_imagem > $tamanho_maximo) {
-    echo "Erro: O tamanho do arquivo excede o limite permitido.";
+    $erro = "Erro: O tamanho do arquivo excede o limite permitido.";
+    if (isset($erro)) {
+        header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
+        exit;
+    }
+
 } else {
     // Verifica as dimensões da imagem
     list($largura, $altura) = getimagesize($_FILES['imagem']['tmp_name']);
     if ($largura > 750 || $altura > 480) {
-        echo "Erro: A imagem excede as dimensões permitidas (750x480 pixels).";
+        $erro = "Erro: A imagem excede as dimensões permitidas (750x480 pixels).";
+        if (isset($erro)) {
+            header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
+            exit;
+        }
+        
     } else {
         // Caminho onde a imagem será armazenada
         $caminho_imagem = "C:/imagemprodutos/" . basename($_FILES['imagem']['name']);
@@ -52,9 +66,17 @@ if (!in_array($tipo_imagem, $tipo_permitido)) {
             $stmt->bind_param("ssss", $nomeproduto, $descricao, $preco, $nome_imagem);
 
             if ($stmt->execute()) {
-                echo "Imagem enviada com sucesso.";
+                $sucesso = "Imagem enviada com sucesso.";
+                if (isset($sucesso)) {
+                    header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($sucesso));
+                    exit;
+                }
             } else {
-                echo "Erro ao enviar a imagem: " . $stmt->error;
+                $erro = "Erro ao enviar a imagem: " . $stmt->error;
+                if (isset($erro)) {
+                    header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
+                    exit;
+                }
             }
 
             $stmt->close();

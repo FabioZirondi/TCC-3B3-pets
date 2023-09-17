@@ -12,14 +12,14 @@ include_once("../php/verificaSession.php");
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../css/HomePage.css">
+        <link rel="stylesheet" href="../css/catalogo.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Montserrat:wght@100;200&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../css/catalogo.css">
         <title>Catálogo</title>
     </head>
-    
+    <script src="../js/HomePage.js"></script>
     <body>
         <header>
             <div class="topnav" id="myTopnav">
@@ -48,7 +48,7 @@ include_once("../php/verificaSession.php");
     ?>
     
       <!--
-      <?php
+      
                 include 'conexao.php';
 
                 // Consulta SQL para obter os dados dos produtos
@@ -74,8 +74,9 @@ include_once("../php/verificaSession.php");
                 }
 
                 $conn->close();
-                ?> 
+                
                 -->
+                
 </main>
 <footer>
     <h1>I-Pet</h1>
@@ -88,7 +89,6 @@ include_once("../php/verificaSession.php");
     </div>
     <p>&copy; 2023. Todos os direitos reservados.</p>
 </footer>
-<script src="../js/HomePage.js"></script>
 </body>
 
 </html>

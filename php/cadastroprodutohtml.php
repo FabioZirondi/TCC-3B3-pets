@@ -2,6 +2,10 @@
 
 include_once("../php/sessionvendedor.php");
 
+
+$erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
+
+$sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -35,24 +39,43 @@ include_once("../php/sessionvendedor.php");
         <br />
         <br />
         <div class="form">
-        <form class="container-form" action="../php/cadastroproduto.php" method="POST" enctype="multipart/form-data">
-    <h1>Cadastro de produtos</h1>
-    <hr>
+            <form class="container-form" action="../php/cadastroproduto.php" method="POST"
+                enctype="multipart/form-data">
+                <h1>Cadastro de produtos</h1>
+                <hr>
 
-    <label for="nomeprod"><b>Título</b></label>
-    <input type="text" placeholder="Título do produto" name="nomeprod" id="nomeprod" required>
+                <label for="nomeprod"><b>Título</b></label>
+                <input type="text" placeholder="Título do produto" name="nomeprod" id="nomeprod" required>
 
-    <label for="desc"><b>Descrição</b></label>
-    <input type="text" placeholder="Descrição" name="desc" id="desc" required>
+                <label for="desc"><b>Descrição</b></label>
+                <input type="text" placeholder="Descrição" name="desc" id="desc" required>
 
-    <label for="preco"><b>Preço</b></label>
-    <input type="text" placeholder="Preço" name="preco" id="preco" required>
-    
-    <label for="imagem"><b>Imagem</b></label>
-    <input type="file" name="imagem" id="imagem" accept="image/*" required>
+                <label for="preco"><b>Preço</b></label>
+                <input type="text" placeholder="Preço" name="preco" id="preco" required>
 
-    <button type="submit" class="registerbtn">Enviar</button>
-</form>
+                <div class="custom-file-upload">
+                    <button type="button"><img src="../img/upload.png" alt="imagemUpload"> </img>Escolher
+                        Arquivo</button>
+                    <input type="file" name="imagem" id="imagem" accept="image/*" required>
+                </div>
+                <label for="imagem"><b>Selecione uma imagem</b></label>
+                <p><b>A imagem não pode esceder os 750x480 pixels</b></p>
+                    <div class="mensagemerro">
+                    <?php
+                    if (isset($erro)) {
+                        echo "<p>" . $erro . "</p>";
+                    }
+                    ?>
+                    </div>
+                    <div class="mensagemdesucesso">
+                    <?php
+                    if (isset($sucesso)) {
+                        echo "<p>" . $sucesso . "</p>";
+                    }
+                    ?>
+
+                <button type="submit" class="registerbtn">Enviar</button>
+            </form>
 
 
 

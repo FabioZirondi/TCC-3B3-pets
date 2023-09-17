@@ -186,6 +186,7 @@ body {
 
 /* Sobre nós */
 
+
 .container_about {
     margin: 40px;
     
@@ -267,4 +268,15 @@ body {
   footer {
     margin-top: 20px; /* Ajuste o valor conforme necessário */
   }
+
+  /* mensagem de status */
+
+  .mensagemerro {
+    color: red;
+    margin-top: 10px;
+  }
   
+  .mensagemdesucesso {
+    color: green;
+    margin-top: 10px;
+  }

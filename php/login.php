@@ -2,6 +2,7 @@
 
 include_once("../php/verificaSessionPagInicial.php");
 
+$erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
 ?>
 
 <!DOCTYPE html>
@@ -64,6 +65,16 @@ include_once("../php/verificaSessionPagInicial.php");
                     <input type="password" placeholder="Enter Password" name="senha" id="senha" required>
 
                     <hr>
+
+                    <div class="mensagemerro">
+                    <?php 
+                    
+                    if (isset($erro)) {
+                        echo "<p><b>" . $erro . "</b></p>";
+                    }
+
+                    ?>
+                    </div>
                     <p>Ainda não tem conta? <a href="../php/cadastrohtml.php">Cadastre-se</a>.</p>
 
                     <button type="submit" class="registerbtn">Enviar</button>

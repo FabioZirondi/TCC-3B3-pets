@@ -38,10 +38,18 @@ if ($resultado_usuario || $resultado_vendedor) {
             }
             exit;
         } else {
-            echo "Senha incorreta";
+            $erro = "Senha incorreta!";
+            if (isset($erro)) {
+                header("Location: ../php/login.php?erro=" . urlencode($erro));
+                exit;
+            }
         }
     } else {
-        echo "Usuário não encontrado. Acesso negado.";
+        $erro = "Usuário não encontrado!";
+        if (isset($erro)) {
+            header("Location: ../php/login.php?erro=" . urlencode($erro));
+            exit;
+        }
     }
 } else {
     echo "Erro na consulta: " . mysqli_error($conn);

@@ -5,6 +5,7 @@ include_once("../php/conexao.php");
 
 //busca o cod do vendedor para referenciar com os produtos
 $codigoVendedor = $_SESSION['codigo_vendedor'];
+$sessionEmail = $_SESSION['email'];
 
 // Informações do produto
 $nomeproduto = $_POST['nomeprod'];
@@ -59,9 +60,9 @@ if (!in_array($tipo_imagem, $tipo_permitido)) {
     // Salvar a imagem na pasta "imagemprodutos"
     if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_imagem)) {
         // Inserir informações da imagem no banco de dados
-        $sql = "INSERT INTO produtos (nome_produto, descricao, preco, imagem_nome_uniq, cod_vendedor) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO produtos (nome_produto, descricao, preco, imagem_nome_uniq, cod_vendedor, email) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssi", $nomeproduto, $descricao, $preco, $nome_imagem, $codigoVendedor);
+        $stmt->bind_param("ssssis", $nomeproduto, $descricao, $preco, $nome_imagem, $codigoVendedor, $sessionEmail);
 
         if ($stmt->execute()) {
             $sucesso = "Imagem enviada com sucesso.";

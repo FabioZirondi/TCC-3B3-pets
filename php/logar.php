@@ -2,18 +2,29 @@
 session_start();
 
 $email = $_POST['email'];
-$senhalogar = $_POST['senha'];
+$senha = $_POST['senha'];
 
 include_once('../php/conexao.php');
 
 $email = mysqli_real_escape_string($conn, $email);
 
 // Consulta nas tabelas 'usuario' e 'vendedor'
-$stmtlogin_usuario = "SELECT * FROM usuario WHERE email = '$email'";
-$stmtlogin_vendedor = "SELECT * FROM vendedor WHERE email = '$email'";
+$stmtlogin_usuario = "SELECT * FROM usuario WHERE email = ?";
+$stmtlogin_vendedor = "SELECT * FROM vendedor WHERE email = ?";
 
-$resultado_usuario = mysqli_query($conn, $stmtlogin_usuario);
-$resultado_vendedor = mysqli_query($conn, $stmtlogin_vendedor);
+if ($stmt = mysqli_prepare($conn, $stmtlogin_usuario)) {
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $resultado_usuario = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_close($stmt);
+}
+
+if ($stmt = mysqli_prepare($conn, $stmtlogin_vendedor)) {
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $resultado_vendedor = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_close($stmt);
+}
 
 if ($resultado_usuario || $resultado_vendedor) {
     // Verifica se encontrou um registro em alguma das tabelas
@@ -21,18 +32,14 @@ if ($resultado_usuario || $resultado_vendedor) {
     $vendedor_encontrado = mysqli_num_rows($resultado_vendedor) > 0;
 
     if ($usuario_encontrado || $vendedor_encontrado) {
-        if ($usuario_encontrado) {
-            $row = mysqli_fetch_assoc($resultado_usuario);
-        } else {
-            $row = mysqli_fetch_assoc($resultado_vendedor);
+        $row = ($usuario_encontrado) ? mysqli_fetch_assoc($resultado_usuario) : mysqli_fetch_assoc($resultado_vendedor);
+        $hashed_password = $row['senha'];
 
+        if (password_verify($senha, $hashed_password)) {
+            // Autenticação bem-sucedida
             $_SESSION['codigo_vendedor'] = $row['cod'];
-        }
-
-        if (password_verify($senhalogar, $row['senha'])) {
-
-            // Defina a variável de sessão 'usuario' com base no tipo encontrado
-            $_SESSION['usuario'] = $usuario_encontrado ? 'u' : 'v';
+            $_SESSION['email_vendedor'] = $row['email'];
+            $_SESSION['usuario'] = ($usuario_encontrado) ? 'u' : 'v';
 
             if ($_SESSION['usuario'] == "u") {
                 header("Location: ../php/catalogo.php");
@@ -42,21 +49,18 @@ if ($resultado_usuario || $resultado_vendedor) {
             exit;
         } else {
             $erro = "Senha incorreta!";
-            if (isset($erro)) {
-                header("Location: ../php/login.php?erro=" . urlencode($erro));
-                exit;
-            }
         }
     } else {
         $erro = "Usuário não encontrado!";
-        if (isset($erro)) {
-            header("Location: ../php/login.php?erro=" . urlencode($erro));
-            exit;
-        }
     }
 } else {
     echo "Erro na consulta: " . mysqli_error($conn);
 }
 
 mysqli_close($conn);
+
+if (isset($erro)) {
+    header("Location: ../php/login.php?erro=" . urlencode($erro));
+    exit;
+}
 ?>

@@ -63,11 +63,13 @@ if (mysqli_query($conn, $stmt)) {
 
     session_start();
     $_SESSION['usuario'] = $tipo_usuario;
+    
 
     if ($_SESSION['usuario'] == "u") {
         header("Location: ../php/catalogo.php");
     } elseif ($_SESSION['usuario'] == "v") {
-        $_SESSION['codigo_vendedor'] = $novo_id; // Armazena o código do vendedor na sessão
+        $_SESSION['codigo_vendedor'] = $novo_id; 
+        $_SESSION['email'] = $email;// Armazena o código do vendedor na sessão
         header("Location: ../php/telavendedor.php");
     }
 } else {

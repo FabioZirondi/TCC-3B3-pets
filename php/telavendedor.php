@@ -30,6 +30,12 @@ include_once("../php/sessionvendedor.php");
             </a>
         </div>
     </header>
+    <main>
+
+    </main>
+    <footer>
+        
+    </footer>
     <script src="../js/HomePage.js"></script>
 </body>
 

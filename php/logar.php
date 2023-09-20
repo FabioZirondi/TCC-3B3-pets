@@ -1,10 +1,11 @@
 <?php
 session_start();
 
+include_once('../php/conexao.php');
+
 $email = $_POST['email'];
 $senha = $_POST['senha'];
 
-include_once('../php/conexao.php');
 
 $email = mysqli_real_escape_string($conn, $email);
 

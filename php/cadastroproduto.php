@@ -1,24 +1,29 @@
 <?php
+session_start();
+
 include_once("../php/conexao.php");
 
-//informações do produto
+//busca o cod do vendedor para referenciar com os produtos
+$codigoVendedor = $_SESSION['codigo_vendedor'];
+
+// Informações do produto
 $nomeproduto = $_POST['nomeprod'];
 $descricao = $_POST['desc'];
 $preco = $_POST['preco'];
 
-//imagem
-$nome_imagem = $_FILES['imagem']['name'];
+// Imagem
+$nome_imagem_original = $_FILES['imagem']['name'];
 $tipo_imagem = $_FILES['imagem']['type'];
 $tamanho_imagem = $_FILES['imagem']['size'];
 
 $nomeproduto = mysqli_real_escape_string($conn, $nomeproduto);
 $descricao = mysqli_real_escape_string($conn, $descricao);
 $preco = mysqli_real_escape_string($conn, $preco);
-$nome_imagem = mysqli_real_escape_string($conn, $nome_imagem);
+$nome_imagem_original = mysqli_real_escape_string($conn, $nome_imagem_original);
 $tipo_imagem = mysqli_real_escape_string($conn, $tipo_imagem);
 $tamanho_imagem = mysqli_real_escape_string($conn, $tamanho_imagem);
 
-if (empty($nomeproduto) || empty($descricao) || empty($preco) || empty($nome_imagem) || empty($tipo_imagem) || empty($tamanho_imagem)) {
+if (empty($nomeproduto) || empty($descricao) || empty($preco) || empty($nome_imagem_original) || empty($tipo_imagem) || empty($tamanho_imagem)) {
     echo "Erro: Todos os campos obrigatórios devem estar preenchidos.";
     exit;
 }
@@ -45,44 +50,36 @@ if (!in_array($tipo_imagem, $tipo_permitido)) {
     }
 
 } else {
-    // Verifica as dimensões da imagem
-    list($largura, $altura) = getimagesize($_FILES['imagem']['tmp_name']);
-    if ($largura > 750 || $altura > 480) {
-        $erro = "Erro: A imagem excede as dimensões permitidas (750x480 pixels).";
-        if (isset($erro)) {
-            header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
-            exit;
-        }
-        
-    } else {
-        // Caminho onde a imagem será armazenada
-        $caminho_imagem = "C:/imagemprodutos/" . basename($_FILES['imagem']['name']);
+    // Gere um nome único para a imagem
+    $nome_imagem = uniqid() . '_' . $nome_imagem_original;
 
-        // Salvar a imagem na pasta "imagemprodutos"
-        if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_imagem)) {
-            // Inserir informações da imagem no banco de dados
-            $sql = "INSERT INTO produtos (nome_produto, descricao, preco, imagem_nome_uniq) VALUES (?, ?, ?, ?)";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssss", $nomeproduto, $descricao, $preco, $nome_imagem);
+    // Caminho onde a imagem será armazenada
+    $caminho_imagem = "C:/imagemprodutos/" . $nome_imagem;
 
-            if ($stmt->execute()) {
-                $sucesso = "Imagem enviada com sucesso.";
-                if (isset($sucesso)) {
-                    header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($sucesso));
-                    exit;
-                }
-            } else {
-                $erro = "Erro ao enviar a imagem: " . $stmt->error;
-                if (isset($erro)) {
-                    header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
-                    exit;
-                }
+    // Salvar a imagem na pasta "imagemprodutos"
+    if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_imagem)) {
+        // Inserir informações da imagem no banco de dados
+        $sql = "INSERT INTO produtos (nome_produto, descricao, preco, imagem_nome_uniq, cod_vendedor) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssssi", $nomeproduto, $descricao, $preco, $nome_imagem, $codigoVendedor);
+
+        if ($stmt->execute()) {
+            $sucesso = "Imagem enviada com sucesso.";
+            if (isset($sucesso)) {
+                header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($sucesso));
+                exit;
             }
-
-            $stmt->close();
         } else {
-            echo "Erro ao fazer o upload da imagem.";
+            $erro = "Erro ao enviar a imagem: " . $stmt->error;
+            if (isset($erro)) {
+                header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
+                exit;
+            }
         }
+
+        $stmt->close();
+    } else {
+        echo "Erro ao fazer o upload da imagem.";
     }
 }
 

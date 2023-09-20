@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $email = $_POST['email'];
 $senhalogar = $_POST['senha'];
 
@@ -23,10 +25,11 @@ if ($resultado_usuario || $resultado_vendedor) {
             $row = mysqli_fetch_assoc($resultado_usuario);
         } else {
             $row = mysqli_fetch_assoc($resultado_vendedor);
+
+            $_SESSION['codigo_vendedor'] = $row['cod'];
         }
 
         if (password_verify($senhalogar, $row['senha'])) {
-            session_start();
 
             // Defina a variável de sessão 'usuario' com base no tipo encontrado
             $_SESSION['usuario'] = $usuario_encontrado ? 'u' : 'v';

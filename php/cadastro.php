@@ -57,14 +57,17 @@ if ($tipo_usuario === 'v') {
 }
 
 // Inserção do usuário no banco de dados
-session_start();
-
 if (mysqli_query($conn, $stmt)) {
+    // Recupere o ID (ou código) recém-gerado a partir do banco de dados
+    $novo_id = mysqli_insert_id($conn);
+
+    session_start();
     $_SESSION['usuario'] = $tipo_usuario;
 
     if ($_SESSION['usuario'] == "u") {
         header("Location: ../php/catalogo.php");
     } elseif ($_SESSION['usuario'] == "v") {
+        $_SESSION['codigo_vendedor'] = $novo_id; // Armazena o código do vendedor na sessão
         header("Location: ../php/telavendedor.php");
     }
 } else {

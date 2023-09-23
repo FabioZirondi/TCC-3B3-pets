@@ -51,7 +51,7 @@ $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
                 <input type="text" placeholder="Descrição" name="desc" id="desc" required>
 
                 <label for="preco"><b>Preço</b></label>
-                <input type="text" placeholder="Preço" name="preco" id="preco" required>
+                <input type="number" placeholder="Preço" name="preco" id="preco" required>
 
                 <div class="custom-file-upload">
                     <button type="button"><img src="../img/upload.png" alt="imagemUpload"> </img>Escolher

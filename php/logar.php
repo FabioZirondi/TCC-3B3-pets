@@ -49,9 +49,11 @@ if ($resultado_usuario || $resultado_vendedor) {
             }
             exit;
         } else {
+            $_SESSION['email_vendedor'] = ''; 
             $erro = "Senha incorreta!";
         }
     } else {
+        $_SESSION['email_vendedor'] = ''; 
         $erro = "Usuário não encontrado!";
     }
 } else {

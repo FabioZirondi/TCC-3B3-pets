@@ -3,9 +3,11 @@ session_start();
 
 include_once("../php/conexao.php");
 
+$sessionEmail = isset($_SESSION['email_vendedor']) ? $_SESSION['email_vendedor'] : '';
+
 //busca o cod do vendedor para referenciar com os produtos
 $codigoVendedor = $_SESSION['codigo_vendedor'];
-$sessionEmail = $_SESSION['email'];
+$sessionEmail = $_SESSION['email_vendedor'];
 
 // Informações do produto
 $nomeproduto = $_POST['nomeprod'];
@@ -25,12 +27,16 @@ $tipo_imagem = mysqli_real_escape_string($conn, $tipo_imagem);
 $tamanho_imagem = mysqli_real_escape_string($conn, $tamanho_imagem);
 
 if (empty($nomeproduto) || empty($descricao) || empty($preco) || empty($nome_imagem_original) || empty($tipo_imagem) || empty($tamanho_imagem)) {
-    echo "Erro: Todos os campos obrigatórios devem estar preenchidos.";
+    $erro = "Todos os campos obrigatórios devem estar preenchidos." . $stmt->error;
+    if (isset($erro)) {
+        header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
+        exit;
+    }
     exit;
 }
 
 // Verificações de arquivo
-$tipo_permitido = ['image/jpeg', 'image/png', 'image/gif']; // Tipos de arquivo permitidos
+$tipo_permitido = ['image/jpeg', 'image/png']; // Tipos de arquivo permitidos
 $tamanho_maximo = 5 * 1024 * 1024; // Tamanho máximo de 5 MB (em bytes)
 
 $tipo_imagem = $_FILES['imagem']['type'];
@@ -55,7 +61,7 @@ if (!in_array($tipo_imagem, $tipo_permitido)) {
     $nome_imagem = uniqid() . '_' . $nome_imagem_original;
 
     // Caminho onde a imagem será armazenada
-    $caminho_imagem = "C:/imagemprodutos/" . $nome_imagem;
+    $caminho_imagem = "../imagemprodutos/" . $nome_imagem;
 
     // Salvar a imagem na pasta "imagemprodutos"
     if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_imagem)) {
@@ -80,7 +86,11 @@ if (!in_array($tipo_imagem, $tipo_permitido)) {
 
         $stmt->close();
     } else {
-        echo "Erro ao fazer o upload da imagem.";
+        $erro = "Erro ao enviar a imagem: " . $stmt->error;
+        if (isset($erro)) {
+            header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
+            exit;
+        }
     }
 }
 

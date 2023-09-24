@@ -38,22 +38,26 @@ if ($resultado_usuario || $resultado_vendedor) {
 
         if (password_verify($senha, $hashed_password)) {
             // Autenticação bem-sucedida
-            $_SESSION['codigo_vendedor'] = $row['cod'];
-            $_SESSION['email_vendedor'] = $row['email'];
-            $_SESSION['usuario'] = ($usuario_encontrado) ? 'u' : 'v';
+            $codigo_vendedor = $row['cod'];
+            $email_vendedor = $row['email'];
+            $usuario_tipo = ($usuario_encontrado) ? 'u' : 'v';
 
-            if ($_SESSION['usuario'] == "u") {
+            $_SESSION['codigo_vendedor'] = $codigo_vendedor;
+            $_SESSION['email_vendedor'] = $email_vendedor;
+            $_SESSION['usuario'] = $usuario_tipo;
+
+            if ($usuario_tipo == "u") {
                 header("Location: ../php/catalogo.php");
-            } elseif ($_SESSION['usuario'] == "v") {
+            } elseif ($usuario_tipo == "v") {
                 header("Location: ../php/telavendedor.php");
             }
             exit;
         } else {
-            $_SESSION['email_vendedor'] = ''; 
+            $_SESSION['email_vendedor'] = '';
             $erro = "Senha incorreta!";
         }
     } else {
-        $_SESSION['email_vendedor'] = ''; 
+        $_SESSION['email_vendedor'] = '';
         $erro = "Usuário não encontrado!";
     }
 } else {

@@ -55,10 +55,24 @@ if (!in_array($tipo_imagem, $tipo_permitido)) {
         header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
         exit;
     }
-
 } else {
     // Gere um nome único para a imagem
     $nome_imagem = uniqid() . '_' . $nome_imagem_original;
+
+    // Verifique se o nome de imagem já existe no banco de dados
+    $sql_verificar_imagem = "SELECT id FROM produtos WHERE imagem_nome_uniq = ?";
+    $stmt_verificar_imagem = $conn->prepare($sql_verificar_imagem);
+    $stmt_verificar_imagem->bind_param("s", $nome_imagem);
+    $stmt_verificar_imagem->execute();
+    $result_verificar_imagem = $stmt_verificar_imagem->get_result();
+
+    if ($result_verificar_imagem->num_rows > 0) {
+        $erro = "Erro: O nome da imagem já existe.";
+        if (isset($erro)) {
+            header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
+            exit;
+        }
+    }
 
     // Caminho onde a imagem será armazenada
     $caminho_imagem = "../imagemprodutos/" . $nome_imagem;
@@ -71,6 +85,12 @@ if (!in_array($tipo_imagem, $tipo_permitido)) {
         $stmt->bind_param("ssssis", $nomeproduto, $descricao, $preco, $nome_imagem, $codigoVendedor, $sessionEmail);
 
         if ($stmt->execute()) {
+            // Obtém o último ID inserido
+            $ultimoID = mysqli_insert_id($conn);
+        
+            // Armazena o último ID na sessão
+            $_SESSION['id_produto'] = $ultimoID;
+        
             $sucesso = "Imagem enviada com sucesso.";
             if (isset($sucesso)) {
                 header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($sucesso));

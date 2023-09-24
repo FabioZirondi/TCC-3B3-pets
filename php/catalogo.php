@@ -21,12 +21,17 @@ include_once("../php/verificaSession.php");
     <title>Catálogo</title>
 </head>
 <script src="../js/HomePage.js"></script>
-
 <body>
     <header>
         <div class="topnav" id="myTopnav">
             <a href="../php/HomePage.php" class="active">I-Pet</a>
             <a href="../php/logout.php"> <button class="button" type="button">Sair</button></a>
+            <?php 
+
+            if($_SESSION['usuario'] == 'v'){
+                echo "<a href='../php/telavendedor.php'>Seus produtos</a>";
+            }
+            ?>
             <a href="#sobre">Sobre</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <i class="fa fa-bars"></i>

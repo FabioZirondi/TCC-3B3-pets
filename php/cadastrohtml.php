@@ -2,6 +2,8 @@
 
 include_once("../php/verificaSessionPagInicial.php");
 
+$erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
+
 ?>
 
 <!DOCTYPE html>
@@ -83,6 +85,15 @@ include_once("../php/verificaSessionPagInicial.php");
                     </div>
                     <hr>
                     <button type="submit" class="registerbtn">Register</button>
+                    <div class="mensagemerro">
+                    <?php 
+                    
+                    if (isset($erro)) {
+                        echo "<p><b>" . $erro . "</b></p>";
+                    }
+
+                    ?>
+                    </div>
                     <p>já possuí conta? <a href="../php/login.php">Login</a>.</p>
                 </form>
                 <script>

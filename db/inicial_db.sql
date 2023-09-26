@@ -9,7 +9,7 @@ create table usuario (
 create table vendedor(
 	cod int PRIMARY KEY AUTO_INCREMENT,
     nome varchar(40),
-    email varchar(40),
+    email varchar(40) UNIQUE,
     senha varchar(255),
     telefone varchar(19),
     nomeemp varchar(20),
@@ -32,7 +32,3 @@ CREATE TABLE produtos (
         FOREIGN KEY (email)
         REFERENCES vendedor (email)
 );
-
-SELECT *
-FROM produtos
-WHERE cod_vendedor = 1;

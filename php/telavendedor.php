@@ -49,7 +49,7 @@ if (!$result) {
         <div class="topnav" id="myTopnav">
             <a href="../php/HomePage.php" class="active">I-Pet</a>
             <a href="../php/logout.php"> <button class="button" type="button">Sair</button></a>
-            <a href="../php/cadastroprodutohtml.php">Produtos</a>
+            <a href="../php/cadastroprodutohtml.php">Cadastrar Produto</a>
             <a href="#sobre">Sobre</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <i class="fa fa-bars"></i>

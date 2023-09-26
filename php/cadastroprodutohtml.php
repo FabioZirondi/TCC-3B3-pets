@@ -1,12 +1,10 @@
 <?php
-
 include_once("../php/sessionvendedor.php");
 
-
 $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
-
 $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -54,32 +52,31 @@ $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
                 <label for="preco"><b>Preço</b></label>
                 <input type="number" placeholder="Preço" name="preco" id="preco" required>
 
-                <div class="custom-file-upload">
-                    <button type="button"><img src="../img/upload.png" alt="imagemUpload"> </img>Escolher
-                        Arquivo</button>
-                    <input type="file" name="imagem" id="imagem" accept="image/*" required>
-                </div>
                 <label for="imagem"><b>Selecione uma imagem</b></label>
-                <p><b>A imagem não pode esceder os 750x480 pixels</b></p>
-                    <div class="mensagemerro">
+                <div class="custom-file-upload">
+                    <input type="file" name="imagem" id="imagem" onclick="exibirmensagem()" accept="image/*" required>
+                    <label for="imagem" id="fileLabel"><img src="../img/upload.png" alt="imagemUpload"> Escolher
+                        Arquivo</label>
+                </div>
+
+                <div class="mensagemerro">
                     <?php
                     if (isset($erro)) {
                         echo "<p>" . $erro . "</p>";
                     }
                     ?>
-                    </div>
-                    <div class="mensagemdesucesso">
+                </div>
+                <div class="mensagemdesucesso">
                     <?php
                     if (isset($sucesso)) {
                         echo "<p>" . $sucesso . "</p>";
                     }
                     ?>
 
-                <button type="submit" class="registerbtn">Enviar</button>
+                    <button type="submit" class="registerbtn">Enviar</button>
+                </div>
             </form>
-
-
-
+        </div>
     </main>
     <footer>
         <h1>I-Pet</h1>

@@ -79,7 +79,8 @@ if (mysqli_query($conn, $stmt)) {
 
     session_start();
     $_SESSION['usuario'] = $tipo_usuario;
-    $_SESSION['email_vendedor'] = $email; // Defina o email na sessão
+    $_SESSION['email_vendedor'] = $email; 
+    $_SESSION['nome'] = $nome;
 
     if ($_SESSION['usuario'] == "u") {
         header("Location: ../php/catalogo.php");

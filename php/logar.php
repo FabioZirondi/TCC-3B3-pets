@@ -40,10 +40,12 @@ if ($resultado_usuario || $resultado_vendedor) {
             // Autenticação bem-sucedida
             $codigo_vendedor = $row['cod'];
             $email_vendedor = $row['email'];
+            $nome = $row['nome'];
             $usuario_tipo = ($usuario_encontrado) ? 'u' : 'v';
 
             $_SESSION['codigo_vendedor'] = $codigo_vendedor;
             $_SESSION['email_vendedor'] = $email_vendedor;
+            $_SESSION['nome'] = $nome;
             $_SESSION['usuario'] = $usuario_tipo;
 
             if ($usuario_tipo == "u") {

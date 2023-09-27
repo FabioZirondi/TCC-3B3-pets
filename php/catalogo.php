@@ -21,14 +21,15 @@ include_once("../php/verificaSession.php");
     <title>Catálogo</title>
 </head>
 <script src="../js/HomePage.js"></script>
+
 <body>
     <header>
         <div class="topnav" id="myTopnav">
             <a href="../php/HomePage.php" class="active">I-Pet</a>
             <a href="../php/logout.php"> <button class="button" type="button">Sair</button></a>
-            <?php 
+            <?php
 
-            if($_SESSION['usuario'] == 'v'){
+            if ($_SESSION['usuario'] == 'v') {
                 echo "<a href='../php/telavendedor.php'>Seus produtos</a>";
             }
             ?>
@@ -42,10 +43,19 @@ include_once("../php/verificaSession.php");
         </br>
         </br>
         </br>
+
+        </br>
+
         <?php
+        echo "<div class='bemvindo, '>";
+        echo "<h1>Bem-vindo, ";
+        if (isset($_SESSION['nome'])) {
+            echo "{$_SESSION['nome']}!"; 
+        }
+        echo "</h1>";
+        echo "<div class='card-container'>";
         include '../php/conexao.php';
 
-        // Consulta SQL para obter os dados dos produtos
         $sql = "SELECT * FROM produtos";
         $result = $conn->query($sql);
 
@@ -56,7 +66,7 @@ include_once("../php/verificaSession.php");
                 echo "<h1>{$row['nome_produto']}</h1>";
                 echo "<h3>{$row['descricao']}</h3>";
                 echo "<p class='preco'>R$ {$row['preco']}</p>";
-                echo "<p><button>Add to Cart</button></p>";
+                echo "<p><button class='button_catalogo'>Agendar</button></p>";
                 echo "</div>";
             }
         } else {
@@ -65,6 +75,7 @@ include_once("../php/verificaSession.php");
 
         $conn->close();
         ?>
+        </div>
     </main>
     <footer>
         <h1>I-Pet</h1>

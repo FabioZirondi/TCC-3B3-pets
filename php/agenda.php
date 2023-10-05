@@ -2,7 +2,11 @@
 include_once("conexao.php");
 session_start();
 
-$id_produto = $_SESSION['id_produto'];
+
+if(isset($_POST['id_produto'])){
+    $id_produto = $_POST['id_produto'];
+}
+
 $status = 'D';
 
 $produto = null;

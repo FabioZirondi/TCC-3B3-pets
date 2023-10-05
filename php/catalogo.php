@@ -43,14 +43,12 @@ include_once("../php/verificaSession.php");
         </br>
         </br>
         </br>
-
         </br>
-
         <?php
         echo "<div class='bemvindo, '>";
         echo "<h1>Bem-vindo, ";
         if (isset($_SESSION['nome'])) {
-            echo "{$_SESSION['nome']}!"; 
+            echo "{$_SESSION['nome']}!";
         }
         echo "</h1>";
         echo "<div class='card-container'>";
@@ -66,7 +64,10 @@ include_once("../php/verificaSession.php");
                 echo "<h1>{$row['nome_produto']}</h1>";
                 echo "<h3>{$row['descricao']}</h3>";
                 echo "<p class='preco'>R$ {$row['preco']}</p>";
-                echo "<p><button class='button_catalogo'>Agendar</button></p>";
+                echo "<form action='../php/agenda.php' method='POST'>";
+                echo "<input type='hidden' name='id_produto' value='" . $row['id'] . "'>";
+                echo "<button class='button_catalogo' type='submit'>Agendar</button>";
+                echo "</form>";
                 echo "</div>";
             }
         } else {
@@ -75,6 +76,7 @@ include_once("../php/verificaSession.php");
 
         $conn->close();
         ?>
+
         </div>
     </main>
     <footer>

@@ -1,0 +1,55 @@
+.div_main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.button_agenda {
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+    background-color: #dbd8c3;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  .container_principal {
+    text-align: center; /* Centraliza o texto dentro da div */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form label {
+    margin-bottom: 10px; /* Ajuste o valor conforme necessário para obter o espaçamento desejado */
+}
+
+/* Adicione um espaço entre o select e o botão usando a margem superior */
+form select {
+    margin-bottom: 20px; /* Ajuste o valor conforme necessário para obter o espaçamento desejado */
+}
+
+select {
+    width: 90%;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    border: solid 1px black;
+}
+
+select:hover{
+    border: solid 2px black;
+}
+
+select {
+    background-color: #ddd;
+    outline: none;
+}

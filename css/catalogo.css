@@ -31,6 +31,7 @@
   background-color: #dbd8c3;
   border: none;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .button_catalogo:hover {
@@ -40,5 +41,11 @@
   background-color: #9b9b9b;
   transition: background-color .10s;
   border: none;
+}
+@media screen and (max-width: 900px) {
+  .button_catalogo {
+    margin-bottom: 20px;
+  }
+
 }
 

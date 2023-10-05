@@ -28,10 +28,7 @@ $tamanho_imagem = mysqli_real_escape_string($conn, $tamanho_imagem);
 
 if (empty($nomeproduto) || empty($descricao) || empty($preco) || empty($nome_imagem_original) || empty($tipo_imagem) || empty($tamanho_imagem)) {
     $erro = "Todos os campos obrigatórios devem estar preenchidos." . $stmt->error;
-    if (isset($erro)) {
-        header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
-        exit;
-    }
+    header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
     exit;
 }
 
@@ -87,14 +84,13 @@ if (!in_array($tipo_imagem, $tipo_permitido)) {
         if ($stmt->execute()) {
             // Obtém o último ID inserido
             $ultimoID = mysqli_insert_id($conn);
-        
+
             // Armazena o último ID na sessão
             $_SESSION['id_produto'] = $ultimoID;
-        
+
             $sucesso = "Imagem enviada com sucesso.";
             if (isset($sucesso)) {
                 header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($sucesso));
-                exit;
             }
         } else {
             $erro = "Erro ao enviar a imagem: " . $stmt->error;
@@ -114,5 +110,36 @@ if (!in_array($tipo_imagem, $tipo_permitido)) {
     }
 }
 
+if (isset($_POST['horarios']) && is_array($_POST['horarios']) && !empty($_POST['horarios']) && isset($_POST['dia'])) {
+    $data_agendamento = $_POST['dia'];
+    $sql_inserir_horarios = "INSERT INTO horarios_disponiveis (id_produto, data_agendamento, horario, status) VALUES (?, ?, ?, 'D')";
+    $stmt_inserir_horarios = $conn->prepare($sql_inserir_horarios);
+
+    foreach ($_POST['horarios'] as $horario) {
+        $stmt_inserir_horarios->bind_param("iss", $ultimoID, $data_agendamento, $horario);
+        $stmt_inserir_horarios->execute();
+    }
+
+    $stmt_inserir_horarios->close();
+} else {
+    $erro = "Selecione pelo menos um horário e uma data de agendamento.";
+    header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
+    exit;
+}
+
+if (isset($sucesso)) {
+    header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($sucesso));
+}
+
+// Redireciona para a página de sucesso ou erro
+if ($stmt->execute()) {
+    // Produto inserido com sucesso, redirecione para a página de sucesso
+    header("Location: ../php/cadastroprodutohtml.php?sucesso=Produto cadastrado com sucesso.");
+} else {
+    // Erro ao inserir produto, redirecione para a página de erro
+    header("Location: ../php/cadastroprodutohtml.php?erro=Erro ao cadastrar o produto: " . $stmt->error);
+}
+
+var_dump($horario);
 $conn->close();
 ?>

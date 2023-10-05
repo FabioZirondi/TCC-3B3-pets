@@ -32,3 +32,46 @@ CREATE TABLE produtos (
         FOREIGN KEY (email)
         REFERENCES vendedor (email)
 );
+
+
+
+
+-- teste
+
+-- Tabela para armazenar os agendamentos
+CREATE TABLE agendamentos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_produto INT,
+    id_usuario INT,
+    data_agendamento DATETIME,
+    status CHAR(1),
+    CONSTRAINT fk_id_produto
+        FOREIGN KEY (id_produto)
+        REFERENCES produtos (id),
+    CONSTRAINT fk_id_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuario (cod)
+);
+
+-- Tabela para armazenar os horários disponíveis para agendamento
+CREATE TABLE horarios_disponiveis (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_produto INT,
+    data_agendamento DATETIME,
+    status CHAR(1),
+    CONSTRAINT fk_id_produto_horarios
+        FOREIGN KEY (id_produto)
+        REFERENCES produtos (id)
+);
+
+INSERT INTO horarios_disponiveis (id_produto, data_agendamento, status)
+VALUES
+(1, '2023-10-01 07:00:00', 'D'),
+(1, '2023-10-01 08:00:00', 'D'),
+(1, '2023-10-01 09:00:00', 'D'),
+(1, '2023-10-01 10:00:00', 'D'),
+(1, '2023-10-01 13:00:00', 'D'),
+(1, '2023-10-01 14:00:00', 'D'),
+(1, '2023-10-01 15:00:00', 'D'),
+(1, '2023-10-01 16:00:00', 'D'),
+(1, '2023-10-01 17:00:00', 'D');

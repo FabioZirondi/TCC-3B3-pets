@@ -59,6 +59,66 @@ $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
                         Arquivo</label>
                 </div>
 
+                <p>Quais horários ficaram disponíveis?</p>
+
+                <label for="dia"><b>Dia do agendamento</b></label>
+                <input type="number" placeholder="Dia" name="dia" id="dia" required>
+
+                <p>Horários</p>
+
+                <label class="container-checkbox"><b>7:00</b>
+                    <input type="checkbox" name="horarios[]" value="07:00">
+                   <span class="checkmark"></span>
+                </label>
+                <label class="container-checkbox"><b>8:00</b>
+                    <input type="checkbox" name="horarios[]" value="08:00">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container-checkbox"><b>9:00</b>
+                    <input type="checkbox" name="horarios[]" value="09:00">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container-checkbox"><b>10:00</b>
+                    <input type="checkbox" name="horarios[]" value="10:00">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container-checkbox"><b>11:00</b>
+                    <input type="checkbox" name="horarios[]" value="11:00">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container-checkbox"><b>12:00</b>
+                    <input type="checkbox" name="horarios[]" value="12:00">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container-checkbox"><b>13:00</b>
+                    <input type="checkbox" name="horarios[]" value="13:00">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container-checkbox"><b>14:00</b>
+                    <input type="checkbox" name="horarios[]" value="14:00">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container-checkbox"><b>15:00</b>
+                    <input type="checkbox" name="horarios[]" value="15:00">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container-checkbox"><b>16:00</b>
+                    <input type="checkbox" name="horarios[]" value="16:00">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container-checkbox"><b>17:00</b>
+                    <input type="checkbox" name="horarios[]" value="17:00">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container-checkbox"><b>18:00</b>
+                    <input type="checkbox" name="horarios[]" value="18:00">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container-checkbox"><b>19:00</b>
+                    <input type="checkbox" name="horarios[]" value="19:00">
+                    <span class="checkmark"></span>
+                </label>
+
                 <div class="mensagemerro">
                     <?php
                     if (isset($erro)) {

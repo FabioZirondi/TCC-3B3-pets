@@ -37,6 +37,7 @@ CREATE TABLE horarios_disponiveis (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_produto INT,
     data_agendamento DATETIME,
+    horario time,
     status CHAR(1),
     CONSTRAINT fk_id_produto_horarios
         FOREIGN KEY (id_produto)

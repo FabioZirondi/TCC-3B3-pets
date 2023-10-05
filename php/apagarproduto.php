@@ -5,6 +5,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['produto_id'])) {
     // Recupere o ID do produto do formulário
     $produto_id = $_POST['produto_id'];
 
+    // Delete horários disponíveis relacionados ao produto
+    $sql_apagar_horarios = "DELETE FROM horarios_disponiveis WHERE id_produto = ?";
+    $stmt_apagar_horarios = $conn->prepare($sql_apagar_horarios);
+    $stmt_apagar_horarios->bind_param("i", $produto_id);
+    $stmt_apagar_horarios->execute();
+
     // Execute uma consulta SQL para excluir o produto com base no ID
     $sql = "DELETE FROM produtos WHERE id = ?";
     $stmt = $conn->prepare($sql);
@@ -21,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['produto_id'])) {
             header("Location: telavendedor.php?erro=" . urlencode($erro));
             exit;
         }
-        exit;
     }
 
     $stmt->close();
@@ -31,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['produto_id'])) {
         header("Location: telavendedor.php?erro=" . urlencode($erro));
         exit;
     }
-    exit;
 }
 
 $conn->close();

@@ -61,8 +61,8 @@ include_once("../php/verificaSession.php");
             while ($row = $result->fetch_assoc()) {
                 echo "<div class='card'>";
                 echo "<img src='../imagemprodutos/{$row['imagem_nome_uniq']}' alt='{$row['descricao']}' style='width:100%'>";
-                echo "<h1>{$row['nome_produto']}</h1>";
-                echo "<h3>{$row['descricao']}</h3>";
+                echo "<h2>{$row['nome_produto']}</h2>";
+                echo "<h4>{$row['descricao']}</h4>";
                 echo "<p class='preco'>R$ {$row['preco']}</p>";
                 echo "<form action='../php/agenda.php' method='POST'>";
                 echo "<input type='hidden' name='id_produto' value='" . $row['id'] . "'>";

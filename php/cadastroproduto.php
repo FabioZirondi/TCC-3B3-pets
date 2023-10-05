@@ -19,12 +19,19 @@ $nome_imagem_original = $_FILES['imagem']['name'];
 $tipo_imagem = $_FILES['imagem']['type'];
 $tamanho_imagem = $_FILES['imagem']['size'];
 
+//Horários 
+
+$horarios = $_POST['horarios'];
+$dia = $_POST['dia'];
+
+
 $nomeproduto = mysqli_real_escape_string($conn, $nomeproduto);
 $descricao = mysqli_real_escape_string($conn, $descricao);
 $preco = mysqli_real_escape_string($conn, $preco);
 $nome_imagem_original = mysqli_real_escape_string($conn, $nome_imagem_original);
 $tipo_imagem = mysqli_real_escape_string($conn, $tipo_imagem);
 $tamanho_imagem = mysqli_real_escape_string($conn, $tamanho_imagem);
+$dia = mysqli_real_escape_string($conn, $dia);
 
 if (empty($nomeproduto) || empty($descricao) || empty($preco) || empty($nome_imagem_original) || empty($tipo_imagem) || empty($tamanho_imagem)) {
     $erro = "Todos os campos obrigatórios devem estar preenchidos." . $stmt->error;
@@ -85,11 +92,21 @@ if (!in_array($tipo_imagem, $tipo_permitido)) {
             // Obtém o último ID inserido
             $ultimoID = mysqli_insert_id($conn);
 
-            // Armazena o último ID na sessão
+            //CADASTRO DE HORÁRIOS
             $_SESSION['id_produto'] = $ultimoID;
 
-            $sucesso = "Imagem enviada com sucesso.";
+            $sql_inserir_horario = "INSERT INTO horarios_disponiveis (id_produto, data_agendamento, horario, status) VALUES (?, ?, ?, 'D')";
+            $stmt_inserir_horario = $conn->prepare($sql_inserir_horario);
+
+            foreach ($_POST['horarios'] as $horario) {
+                $stmt_inserir_horario->bind_param("iss", $ultimoID, $dia, $horario);
+                $stmt_inserir_horario->execute();
+            }
+
+            $stmt_inserir_horario->close();
+            $sucesso = "Informações enviadas com sucesso.";
             if (isset($sucesso)) {
+
                 header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($sucesso));
             }
         } else {
@@ -110,36 +127,6 @@ if (!in_array($tipo_imagem, $tipo_permitido)) {
     }
 }
 
-if (isset($_POST['horarios']) && is_array($_POST['horarios']) && !empty($_POST['horarios']) && isset($_POST['dia'])) {
-    $data_agendamento = $_POST['dia'];
-    $sql_inserir_horarios = "INSERT INTO horarios_disponiveis (id_produto, data_agendamento, horario, status) VALUES (?, ?, ?, 'D')";
-    $stmt_inserir_horarios = $conn->prepare($sql_inserir_horarios);
 
-    foreach ($_POST['horarios'] as $horario) {
-        $stmt_inserir_horarios->bind_param("iss", $ultimoID, $data_agendamento, $horario);
-        $stmt_inserir_horarios->execute();
-    }
-
-    $stmt_inserir_horarios->close();
-} else {
-    $erro = "Selecione pelo menos um horário e uma data de agendamento.";
-    header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
-    exit;
-}
-
-if (isset($sucesso)) {
-    header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($sucesso));
-}
-
-// Redireciona para a página de sucesso ou erro
-if ($stmt->execute()) {
-    // Produto inserido com sucesso, redirecione para a página de sucesso
-    header("Location: ../php/cadastroprodutohtml.php?sucesso=Produto cadastrado com sucesso.");
-} else {
-    // Erro ao inserir produto, redirecione para a página de erro
-    header("Location: ../php/cadastroprodutohtml.php?erro=Erro ao cadastrar o produto: " . $stmt->error);
-}
-
-var_dump($horario);
 $conn->close();
 ?>

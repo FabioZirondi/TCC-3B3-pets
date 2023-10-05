@@ -41,6 +41,20 @@ $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
             <form class="container-form" action="../php/cadastroproduto.php" method="POST"
                 enctype="multipart/form-data">
                 <h1>Cadastro de produtos</h1>
+                <div class="mensagemerro"><b>
+                        <?php
+                        if (isset($erro)) {
+                            echo "<p>" . $erro . "</p>";
+                        }
+                        ?>
+                    </b></div>
+                <div class="mensagemdesucesso"><b>
+                        <?php
+                        if (isset($sucesso)) {
+                            echo "<p>" . $sucesso . "</p>";
+                        }
+                        ?>
+                </b></div>
                 <hr>
 
                 <label for="nomeprod"><b>Título</b></label>
@@ -68,7 +82,7 @@ $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
 
                 <label class="container-checkbox"><b>7:00</b>
                     <input type="checkbox" name="horarios[]" value="07:00">
-                   <span class="checkmark"></span>
+                    <span class="checkmark"></span>
                 </label>
                 <label class="container-checkbox"><b>8:00</b>
                     <input type="checkbox" name="horarios[]" value="08:00">
@@ -118,23 +132,8 @@ $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
                     <input type="checkbox" name="horarios[]" value="19:00">
                     <span class="checkmark"></span>
                 </label>
-
-                <div class="mensagemerro">
-                    <?php
-                    if (isset($erro)) {
-                        echo "<p>" . $erro . "</p>";
-                    }
-                    ?>
-                </div>
-                <div class="mensagemdesucesso">
-                    <?php
-                    if (isset($sucesso)) {
-                        echo "<p>" . $sucesso . "</p>";
-                    }
-                    ?>
-
-                    <button type="submit" class="registerbtn">Enviar</button>
-                </div>
+                
+                <button type="submit" class="registerbtn">Enviar</button>
             </form>
         </div>
     </main>

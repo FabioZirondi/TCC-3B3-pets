@@ -4,7 +4,7 @@ create table usuario (
     email varchar(40),
     senha varchar(255),
     tipo char(1)
-);
+) AUTO_INCREMENT = 1;
 
 create table vendedor(
 	cod int PRIMARY KEY AUTO_INCREMENT,
@@ -15,7 +15,7 @@ create table vendedor(
     nomeemp varchar(20),
     cnpj varchar(19),
     tipo char(1)
-);
+) AUTO_INCREMENT = 1000001;;
 
 CREATE TABLE produtos (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -31,7 +31,7 @@ CREATE TABLE produtos (
     CONSTRAINT fk_email_vendedor
         FOREIGN KEY (email)
         REFERENCES vendedor (email)
-);
+) AUTO_INCREMENT = 2000001;;
 
 CREATE TABLE horarios_disponiveis (
     id INT AUTO_INCREMENT PRIMARY KEY,

@@ -2,8 +2,7 @@
 include_once("conexao.php");
 session_start();
 
-
-if(isset($_POST['id_produto'])){
+if (isset($_POST['id_produto'])) {
     $id_produto = $_POST['id_produto'];
 }
 
@@ -66,7 +65,7 @@ if ($id_produto) {
     <header>
         <div class="topnav" id="myTopnav">
             <a href="../php/HomePage.php" class="active">I-Pet</a>
-            <a href="../php/logout.php"> <button class="button" type="button">Sair</button></a>
+            <a href="../php/logout.php"><button class="button" type="button">Sair</button></a>
             <a href="#sobre">Sobre</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <i class="fa fa-bars"></i>
@@ -75,26 +74,31 @@ if ($id_produto) {
     </header>
     <main>
         <div class="div_main">
-        </br>
-        </br>
+            </br>
+            </br>
             <h2>Qual horário deseja agendar?</h2>
-            <p><b>
-                    Serviço:
+            <p><b>Serviço:
                     <?php echo $produto ? $produto['nome_produto'] : 'Produto não encontrado'; ?>
-            </b></p>
+                </b></p>
             <div class="container_principal">
                 <?php
                 if ($produto && $horarios_disponiveis) {
                     foreach ($horarios_disponiveis as $dia => $horarios) {
-                        echo "<h3>{$dia}</h3>";
+
+                        $dia_string = str_pad($dia, 8, '0', STR_PAD_LEFT);
+                        $dia_formatado = DateTime::createFromFormat('dmY', $dia_string)->format('d/m/y');
+
+                        // $dia já está no formato 'Y-m-d', então não precisa de formatação adicional
+                        echo "<h3>{$dia_formatado}</h3>";
                         echo "<form action='processar_agendamento.php' method='post'>";
                         echo "<label for='horario'><b>Escolha um horário:</b></label>";
                         echo "<select name='horario' id='horario'>";
                         foreach ($horarios as $horario) {
-                            echo "<option value='{$horario}'>{$horario}</option>";
+                            echo "<option value='{$horario}'>{$horario}h</option>";
                         }
                         echo "</select>";
                         echo "<input type='hidden' name='id_produto' value='{$id_produto}'>";
+                        echo "<input type='hidden' name='data_agendamento' value='{$dia}'>"; // Use $dia diretamente
                         echo "<button type='submit' class='button_agenda'>Agendar</button>";
                         echo "</form>";
                     }
@@ -108,4 +112,5 @@ if ($id_produto) {
     <footer>
     </footer>
 </body>
+
 </html>

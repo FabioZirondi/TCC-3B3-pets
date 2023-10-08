@@ -83,6 +83,7 @@ if (!in_array($tipo_imagem, $tipo_permitido)) {
 
     // Salvar a imagem na pasta "imagemprodutos"
     if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminho_imagem)) {
+
         // Inserir informações da imagem no banco de dados
         $sql = "INSERT INTO produtos (nome_produto, descricao, preco, imagem_nome_uniq, cod_vendedor, email) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
@@ -95,38 +96,29 @@ if (!in_array($tipo_imagem, $tipo_permitido)) {
             //CADASTRO DE HORÁRIOS
             $_SESSION['id_produto'] = $ultimoID;
 
-            $sql_inserir_horario = "INSERT INTO horarios_disponiveis (id_produto, data_agendamento, horario, status) VALUES (?, ?, ?, 'D')";
-            $stmt_inserir_horario = $conn->prepare($sql_inserir_horario);
-
-            foreach ($_POST['horarios'] as $horario) {
-                $stmt_inserir_horario->bind_param("iss", $ultimoID, $dia, $horario);
+            foreach ($horarios as $horario) {
+                $sql_inserir_horario = "INSERT INTO horarios_disponiveis (id_produto, data_agendamento, horario, status) VALUES (?, ?, ?, 'D')";
+                $stmt_inserir_horario = $conn->prepare($sql_inserir_horario);
+                $stmt_inserir_horario->bind_param("iis", $ultimoID, $dia, $horario);
                 $stmt_inserir_horario->execute();
             }
 
             $stmt_inserir_horario->close();
             $sucesso = "Informações enviadas com sucesso.";
-            if (isset($sucesso)) {
-
-                header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($sucesso));
-            }
+            header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($sucesso));
+            exit;
         } else {
             $erro = "Erro ao enviar a imagem: " . $stmt->error;
-            if (isset($erro)) {
-                header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
-                exit;
-            }
-        }
-
-        $stmt->close();
-    } else {
-        $erro = "Erro ao enviar a imagem: " . $stmt->error;
-        if (isset($erro)) {
             header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
             exit;
         }
+
+    } else {
+        $erro = "Erro ao enviar a imagem.";
+        header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($erro));
+        exit;
     }
 }
-
 
 $conn->close();
 ?>

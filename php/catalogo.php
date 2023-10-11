@@ -2,6 +2,8 @@
 
 include_once("../php/verificaSession.php");
 
+$erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
+
 ?>
 
 <!DOCTYPE html>
@@ -45,12 +47,18 @@ include_once("../php/verificaSession.php");
         </br>
         </br>
         <?php
-        echo "<div class='bemvindo, '>";
-        echo "<h1>Bem-vindo, ";
+        echo "<div class='bemvindo'>";
+        echo "<h1>Bem-vindo!</br> ";
         if (isset($_SESSION['nome'])) {
             echo "{$_SESSION['nome']}!";
         }
         echo "</h1>";
+        echo "<div class='mensagemdesucesso'>";
+        if (isset($erro)) {
+            echo "<p><b> $erro </b></p>'";
+        }
+        echo "</div>";
+        echo "</div>";
         echo "<div class='card-container'>";
         include '../php/conexao.php';
 
@@ -64,7 +72,7 @@ include_once("../php/verificaSession.php");
                 echo "<h2>{$row['nome_produto']}</h2>";
                 echo "<h4>{$row['descricao']}</h4>";
                 echo "<p class='preco'>R$ {$row['preco']}</p>";
-                echo "<form action='../php/agenda.php' method='POST'>";
+                echo "<form action='../php/agendahtml.php' method='POST'>";
                 echo "<input type='hidden' name='id_produto' value='" . $row['id'] . "'>";
                 echo "<button class='button_catalogo' type='submit'>Agendar</button>";
                 echo "</form>";

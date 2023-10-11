@@ -82,6 +82,8 @@ if (mysqli_query($conn, $stmt)) {
     $_SESSION['email_vendedor'] = $email; 
     $_SESSION['nome'] = $nome;
 
+    $_SESSION['codigo_usuario_vendedor'] = $novo_id;
+
     if ($_SESSION['usuario'] == "u") {
         header("Location: ../php/catalogo.php");
     } elseif ($_SESSION['usuario'] == "v") {

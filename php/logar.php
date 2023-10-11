@@ -48,6 +48,7 @@ if ($resultado_usuario || $resultado_vendedor) {
             $_SESSION['nome'] = $nome;
             $_SESSION['usuario'] = $usuario_tipo;
 
+            $_SESSION['codigo_usuario_vendedor'] = $codigo_vendedor;
             if ($usuario_tipo == "u") {
                 header("Location: ../php/catalogo.php");
             } elseif ($usuario_tipo == "v") {

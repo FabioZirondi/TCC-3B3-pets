@@ -43,3 +43,23 @@ CREATE TABLE horarios_disponiveis (
         FOREIGN KEY (id_produto)
         REFERENCES produtos (id)
 );
+
+CREATE INDEX idx_produto_horario ON horarios_disponiveis (id_produto, horario);
+
+CREATE TABLE agendamentos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT,
+    id_produto INT,
+    data_agendamento int,
+    horario TIME,
+    status CHAR(1),
+    CONSTRAINT fk_id_usuario
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuario (cod),
+    CONSTRAINT fk_id_produto
+        FOREIGN KEY (id_produto)
+        REFERENCES produtos (id),
+    CONSTRAINT fk_id_produto_horario
+        FOREIGN KEY (id_produto, horario)
+        REFERENCES horarios_disponiveis (id_produto, horario)
+);

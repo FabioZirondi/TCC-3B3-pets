@@ -1,116 +1,56 @@
 <?php
-include_once("conexao.php");
+
+include_once("../php/conexao.php");
 session_start();
 
-if (isset($_POST['id_produto'])) {
+$id_usuario = $_SESSION['codigo_usuario_vendedor'];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_produto = $_POST['id_produto'];
-}
+    $horario = $_POST['horario'];
+    $data_agendamento = $_POST['data_agendamento'];
+    $id_vendedor = $_POST['id_vendedor']; // Aqui está o ID do vendedor que você passou do formulário
 
-$status = 'D';
+    // Consulta para verificar se o id_vendedor é válido
+    $sql_verificar_vendedor = $conn->prepare("SELECT cod FROM vendedor WHERE cod = ?");
+    $sql_verificar_vendedor->bind_param("i", $id_vendedor);
+    $sql_verificar_vendedor->execute();
 
-$produto = null;
-$horarios_disponiveis = [];
+    $result_verificar_vendedor = $sql_verificar_vendedor->get_result();
 
-if ($id_produto) {
-    $sql_horarios = $conn->prepare("SELECT * FROM horarios_disponiveis WHERE id_produto = ? AND `status` = ?");
-    $sql_horarios->bind_param("is", $id_produto, $status);
-    $sql_horarios->execute();
+    if ($result_verificar_vendedor->num_rows > 0) {
+        
+        $sql_inserir_agendamento = $conn->prepare("INSERT INTO agendamentos (id_usuario, id_vendedor, id_produto, data_agendamento, horario, status) VALUES (?, ?, ?, ?, ?, 'A')");
+        $sql_inserir_agendamento->bind_param("iiiss", $id_usuario, $id_vendedor, $id_produto, $data_agendamento, $horario);
 
-    $result_horarios = $sql_horarios->get_result();
+        $sql_atualizar_status = $conn->prepare("UPDATE horarios_disponiveis SET status = 'A' WHERE id_produto = ? AND horario = ?");
+        $sql_atualizar_status->bind_param("is", $id_produto, $horario);
 
-    if ($result_horarios->num_rows > 0) {
-        while ($row_horario = $result_horarios->fetch_assoc()) {
-            $dia = $row_horario['data_agendamento'];
-            $horario = $row_horario['horario'];
-            $horarios_disponiveis[$dia][] = $horario;
+        if ($sql_inserir_agendamento->execute() && $sql_atualizar_status->execute()) {
+            $erro = "Agendamento bem sucessedido";
+        if (isset($erro)) {
+            header("Location: ../php/catalogo.php?erro=" . urlencode($erro));
+            exit;
         }
-
-        $sql_produto = $conn->prepare("SELECT * FROM produtos WHERE id = ?");
-        $sql_produto->bind_param("i", $id_produto);
-        $sql_produto->execute();
-
-        $result_produto = $sql_produto->get_result();
-
-        if ($result_produto->num_rows > 0) {
-            $produto = $result_produto->fetch_assoc();
+        } else {
+            $erro = "Falha ao fazer o agendamento!";
+        if (isset($erro)) {
+            header("Location: ../php/catalogo.php?erro=" . urlencode($erro));
+            exit;
+        }
+        }
+    } else {
+        $erro = "invalidade no id";
+        if (isset($erro)) {
+            header("Location: ../php/catalogo.php?erro=" . urlencode($erro));
+            exit;
         }
     }
 
-    $sql_horarios->close();
-    $sql_produto->close();
-    $conn->close();
+    // Lembre-se de fechar as consultas após usá-las para evitar vazamentos de recursos
+    $sql_verificar_vendedor->close();
+    $sql_inserir_agendamento->close();
+    $sql_atualizar_status->close();
 }
+
 ?>
-
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <title>Agendamento -
-        <?php echo $produto ? $produto['nome_produto'] : 'Produto não encontrado'; ?>
-    </title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/HomePage.css">
-    <link rel="stylesheet" href="../css/agenda.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Montserrat:wght@100;200&display=swap"
-        rel="stylesheet">
-</head>
-
-<body>
-    <header>
-        <div class="topnav" id="myTopnav">
-            <a href="../php/HomePage.php" class="active">I-Pet</a>
-            <a href="../php/logout.php"><button class="button" type="button">Sair</button></a>
-            <a href="#sobre">Sobre</a>
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-                <i class="fa fa-bars"></i>
-            </a>
-        </div>
-    </header>
-    <main>
-        <div class="div_main">
-            </br>
-            </br>
-            <h2>Qual horário deseja agendar?</h2>
-            <p><b>Serviço:
-                    <?php echo $produto ? $produto['nome_produto'] : 'Produto não encontrado'; ?>
-                </b></p>
-            <div class="container_principal">
-                <?php
-                if ($produto && $horarios_disponiveis) {
-                    foreach ($horarios_disponiveis as $dia => $horarios) {
-
-                        $dia_string = str_pad($dia, 8, '0', STR_PAD_LEFT);
-                        $dia_formatado = DateTime::createFromFormat('dmY', $dia_string)->format('d/m/y');
-
-                        // $dia já está no formato 'Y-m-d', então não precisa de formatação adicional
-                        echo "<h3>{$dia_formatado}</h3>";
-                        echo "<form action='processar_agendamento.php' method='post'>";
-                        echo "<label for='horario'><b>Escolha um horário:</b></label>";
-                        echo "<select name='horario' id='horario'>";
-                        foreach ($horarios as $horario) {
-                            echo "<option value='{$horario}'>{$horario}h</option>";
-                        }
-                        echo "</select>";
-                        echo "<input type='hidden' name='id_produto' value='{$id_produto}'>";
-                        echo "<input type='hidden' name='data_agendamento' value='{$dia}'>"; // Use $dia diretamente
-                        echo "<button type='submit' class='button_agenda'>Agendar</button>";
-                        echo "</form>";
-                    }
-                } else {
-                    echo "<p>Produto não encontrado ou não há horários disponíveis para agendamento.</p>";
-                }
-                ?>
-            </div>
-        </div>
-    </main>
-    <footer>
-    </footer>
-</body>
-
-</html>

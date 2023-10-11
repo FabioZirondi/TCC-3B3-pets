@@ -5,6 +5,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['produto_id'])) {
     // Recupere o ID do produto do formulário
     $produto_id = $_POST['produto_id'];
 
+    // Delete os agendamentos relacionados ao produto
+    $sql_apagar_agendamentos = "DELETE FROM agendamentos WHERE id_produto = ?";
+    $stmt_apagar_agendamentos = $conn->prepare($sql_apagar_agendamentos);
+    $stmt_apagar_agendamentos->bind_param("i", $produto_id);
+    $stmt_apagar_agendamentos->execute();
+
     // Delete horários disponíveis relacionados ao produto
     $sql_apagar_horarios = "DELETE FROM horarios_disponiveis WHERE id_produto = ?";
     $stmt_apagar_horarios = $conn->prepare($sql_apagar_horarios);

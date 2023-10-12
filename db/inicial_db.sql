@@ -53,6 +53,7 @@ CREATE TABLE agendamentos (
     data_agendamento int,
     horario TIME,
     status CHAR(1),
+    id_vendor int,
     CONSTRAINT fk_id_usuario
         FOREIGN KEY (id_usuario)
         REFERENCES usuario (cod),

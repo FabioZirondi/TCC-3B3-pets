@@ -1,0 +1,14 @@
+.striped-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .striped-table th, .striped-table td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #000;
+  }
+  
+  .striped-table tr:nth-child(even) {
+    background-color: #cecece;
+  }

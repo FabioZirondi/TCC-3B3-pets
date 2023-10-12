@@ -66,16 +66,23 @@ if (!$result) {
             if ($result->num_rows > 0) {
                 // Exibe os produtos em uma tabela
                 echo "<table>";
-                echo "<tr><th>Nome do Produto</th><th>Descrição</th><th>Preço</th><th>Ações</th></tr>";
+                echo "<tr><th>Nome do Produto</th><th>Descrição</th><th>Preço</th><th>Apagar</th><th>Editar</th></tr>";
                 while ($row = $result->fetch_assoc()) {
+                    $id_produto = $row['id'];
                     echo "<tr>";
                     echo "<td>" . $row['nome_produto'] . "</td>";
                     echo "<td>" . $row['descricao'] . "</td>";
                     echo "<td>R$ " . $row['preco'] . "</td>";
                     echo "<td>";
                     echo "<form method='POST' action='apagarproduto.php' style='display: inline;'>";
-                    echo "<input type='hidden' name='produto_id' value='" . $row['id'] . "'>";
+                    echo "<input type='hidden' name='produto_id' value='" . $id_produto . "'>";
                     echo "<button type='submit'>Apagar</button>";
+                    echo "</form>";
+                    echo "</td>";
+                    echo "<td>";
+                    echo "<form method='POST' action='../php/editarprodutohtml.php' '>";
+                    echo "<input type='hidden' name='id_produto' value='" . $id_produto . "'>";
+                    echo "<button type='submit'>Editar</button>";
                     echo "</form>";
                     echo "</td>";
                     echo "</tr>";

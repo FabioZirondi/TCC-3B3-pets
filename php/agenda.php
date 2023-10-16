@@ -1,6 +1,6 @@
 <?php
-
 include_once("../php/conexao.php");
+
 session_start();
 
 $id_usuario = $_SESSION['codigo_usuario_vendedor'];
@@ -19,38 +19,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result_verificar_vendedor = $sql_verificar_vendedor->get_result();
 
     if ($result_verificar_vendedor->num_rows > 0) {
-        
         $sql_inserir_agendamento = $conn->prepare("INSERT INTO agendamentos (id_usuario, id_vendedor, id_produto, data_agendamento, horario, status) VALUES (?, ?, ?, ?, ?, 'A')");
         $sql_inserir_agendamento->bind_param("iiiss", $id_usuario, $id_vendedor, $id_produto, $data_agendamento, $horario);
 
-        $sql_atualizar_status = $conn->prepare("UPDATE horarios_disponiveis SET status = 'A' WHERE id_produto = ? AND horario = ?");
-        $sql_atualizar_status->bind_param("is", $id_produto, $horario);
+        if ($sql_inserir_agendamento->execute()) {
+            // Atualizar o status na tabela horarios_disponiveis
+            $sql_atualizar_status = $conn->prepare("UPDATE horarios_disponiveis SET status = 'A' WHERE id_produto = ? AND horario = ?");
+            $sql_atualizar_status->bind_param("is", $id_produto, $horario);
 
-        if ($sql_inserir_agendamento->execute() && $sql_atualizar_status->execute()) {
-            $erro = "Agendamento bem sucessedido";
-        if (isset($erro)) {
-            header("Location: ../php/catalogo.php?erro=" . urlencode($erro));
-            exit;
-        }
+            if ($sql_atualizar_status->execute()) {
+                $erro = "Agendamento bem-sucedido";
+            } else {
+                $erro = "Erro ao executar a consulta de atualização: " . $sql_atualizar_status->error;
+            }
         } else {
-            $erro = "Falha ao fazer o agendamento!";
-        if (isset($erro)) {
-            header("Location: ../php/catalogo.php?erro=" . urlencode($erro));
-            exit;
-        }
+            $erro = "Erro ao executar a consulta de inserção: " . $sql_inserir_agendamento->error;
         }
     } else {
-        $erro = "invalidade no id";
-        if (isset($erro)) {
-            header("Location: ../php/catalogo.php?erro=" . urlencode($erro));
-            exit;
-        }
+        $erro = "Vendedor inválido";
     }
 
-    // Lembre-se de fechar as consultas após usá-las para evitar vazamentos de recursos
-    $sql_verificar_vendedor->close();
-    $sql_inserir_agendamento->close();
-    $sql_atualizar_status->close();
+    // Redirecionar para a página de catálogo com a mensagem de erro, se houver
+    header("Location: ../php/catalogo.php?erro=" . urlencode($erro));
+    exit;
 }
-
 ?>

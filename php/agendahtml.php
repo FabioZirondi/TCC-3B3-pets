@@ -70,8 +70,7 @@ if ($id_produto) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Montserrat:wght@100;200&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Montserrat:wght@100;200&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -105,10 +104,10 @@ if ($id_produto) {
                 </div>
                 <?php
                 if ($produto && $horarios_disponiveis) {
-                    foreach ($horarios_disponiveis as $dia => $horarios) {
 
-                        $dia_string = str_pad($dia, 8, '0', STR_PAD_LEFT);
-                        $dia_formatado = DateTime::createFromFormat('dmY', $dia_string)->format('d/m/y');
+                    foreach ($horarios_disponiveis as $dia => $horarios) {
+ 
+                        $dia_formatado = DateTime::createFromFormat('dmY', $dia)->format('m/d/y');
 
                         echo "<h3>{$dia_formatado}</h3>";
                         echo "<form action='../php/agenda.php' method='POST'>";

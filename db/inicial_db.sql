@@ -15,7 +15,7 @@ create table vendedor(
     nomeemp varchar(20),
     cnpj varchar(19),
     tipo char(1)
-) AUTO_INCREMENT = 1000001;;
+) AUTO_INCREMENT = 1000001;
 
 CREATE TABLE produtos (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -36,7 +36,7 @@ CREATE TABLE produtos (
 CREATE TABLE horarios_disponiveis (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_produto INT,
-    data_agendamento DATETIME,
+    data_agendamento int,
     horario time,
     status CHAR(1),
     CONSTRAINT fk_id_produto_horarios
@@ -53,7 +53,7 @@ CREATE TABLE agendamentos (
     data_agendamento int,
     horario TIME,
     status CHAR(1),
-    id_vendor int,
+    id_vendedor int,
     CONSTRAINT fk_id_usuario
         FOREIGN KEY (id_usuario)
         REFERENCES usuario (cod),

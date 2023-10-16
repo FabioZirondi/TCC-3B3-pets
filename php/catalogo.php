@@ -69,6 +69,7 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
         include '../php/conexao.php';
 
         $sql = "SELECT * FROM produtos";
+        
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {

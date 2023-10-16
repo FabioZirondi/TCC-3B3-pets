@@ -5,6 +5,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['produto_id'])) {
     // Recupere o ID do produto do formulário
     $produto_id = $_POST['produto_id'];
 
+    // Selecione o nome da imagem do banco de dados com base no ID do produto
+    $sql_select_imagem = "SELECT imagem_nome_uniq FROM produtos WHERE id = ?";
+    $stmt_select_imagem = $conn->prepare($sql_select_imagem);
+    $stmt_select_imagem->bind_param("i", $produto_id);
+    $stmt_select_imagem->execute();
+    $stmt_select_imagem->bind_result($imagem_nome);
+    $stmt_select_imagem->fetch();
+    $stmt_select_imagem->close();
+
+    // Caminho completo para o arquivo de imagem
+    $caminho_imagem = "../imagemprodutos/" . $imagem_nome;
+
     // Delete os agendamentos relacionados ao produto
     $sql_apagar_agendamentos = "DELETE FROM agendamentos WHERE id_produto = ?";
     $stmt_apagar_agendamentos = $conn->prepare($sql_apagar_agendamentos);
@@ -23,11 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['produto_id'])) {
     $stmt->bind_param("i", $produto_id);
 
     if ($stmt->execute()) {
-        // Produto excluído com sucesso, você pode redirecionar de volta para a página do vendedor ou fazer qualquer outra ação necessária
+        if (file_exists($caminho_imagem)) {
+            unlink($caminho_imagem);
+        }
         header("Location: telavendedor.php");
         exit;
     } else {
-        // Se ocorrer um erro durante a exclusão
         $erro = "Erro ao apagar o produto: " . $stmt->error;
         if (isset($erro)) {
             header("Location: telavendedor.php?erro=" . urlencode($erro));

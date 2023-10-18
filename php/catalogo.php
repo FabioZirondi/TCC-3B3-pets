@@ -33,9 +33,11 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
             if ($_SESSION['usuario'] == 'v') {
                 echo "<a href='../php/telavendedor.php'>Seus produtos</a>";
             }
-            ?>
-            <?php
 
+            if ($_SESSION['usuario'] == 'v') {
+                echo "<a href='../php/agendamentosRecebidos.php'>Agendamentos recebidos</a>";
+            }
+        
             if ($_SESSION['usuario'] == 'u') {
                 echo "<a href='../php/agendamentosRealizados.php'>Seus agendamentos</a>";
             }
@@ -53,11 +55,10 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
         </br>
         <?php
         echo "<div class='bemvindo'>";
-        echo "<h1>Bem-vindo!</br> ";
         if (isset($_SESSION['nome'])) {
-            echo "{$_SESSION['nome']}!";
+            echo "<h1>Bem-vindo, {$_SESSION['nome']}!</h1>";
         }
-        echo "</h1>";
+
         echo "<div class='mensagemdesucesso'>";
         if (isset($erro)) {
             echo "<p><b> $erro </b></p>'";
@@ -67,26 +68,42 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
         echo "<div class='card-container'>";
         include '../php/conexao.php';
 
-        $sql = "SELECT p.id, p.nome_produto, p.descricao, p.preco, p.imagem_nome_uniq
-                FROM produtos p
-                INNER JOIN horarios_disponiveis hd ON p.id = hd.id_produto
-                WHERE hd.status = 'D'
-                GROUP BY p.id";
+        $sql = "SELECT p.id, p.nome_produto, p.descricao, p.preco, p.imagem_nome_uniq, v.nomeemp 
+        FROM produtos p
+        INNER JOIN horarios_disponiveis hd ON p.id = hd.id_produto
+        INNER JOIN vendedor v ON p.cod_vendedor = v.cod
+        WHERE hd.status = 'D'
+        GROUP BY p.id";
 
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                echo "<div class='card'>";
-                echo "<img src='../imagemprodutos/{$row['imagem_nome_uniq']}' alt='{$row['descricao']}' style='width:100%'>";
-                echo "<h2>{$row['nome_produto']}</h2>";
-                echo "<h4>{$row['descricao']}</h4>";
-                echo "<p class='preco'>R$ {$row['preco']}</p>";
-                echo "<form action='../php/agendahtml.php' method='POST'>";
-                echo "<input type='hidden' name='id_produto' value='" . $row['id'] . "'>";
-                echo "<button class='button_catalogo' type='submit'>Agendar</button>";
-                echo "</form>";
-                echo "</div>";
+                if ($_SESSION['usuario'] == 'v') {
+                    echo "<div class='card'>";
+                    echo "<img src='../imagemprodutos/{$row['imagem_nome_uniq']}' alt='{$row['descricao']}' style='width:100%'>";
+                    echo "<h2>{$row['nome_produto']}</h2>";
+                    echo "<h4>{$row['descricao']}</h4>";
+                    echo "<h4> empresa </h4>";
+                    echo "<h4>{$row['nomeemp']}</h4>";
+                    echo "<p class='preco'>R$ {$row['preco']}</p>"; 
+                    echo "<h4 style='color: red;'><b>Apenas para usuários</b></h4>";
+                    echo "</form>";
+                    echo "</div>";
+                }else{
+                    echo "<div class='card'>";
+                    echo "<img src='../imagemprodutos/{$row['imagem_nome_uniq']}' alt='{$row['descricao']}' style='width:100%'>";
+                    echo "<h2>{$row['nome_produto']}</h2>";
+                    echo "<h4>{$row['descricao']}</h4>";
+                    echo "<h4> empresa </h4>";
+                    echo "<h4>{$row['nomeemp']}</h4>";
+                    echo "<p class='preco'>R$ {$row['preco']}</p>";
+                    echo "<form action='../php/agendahtml.php' method='POST'>";
+                    echo "<input type='hidden' name='id_produto' value='" . $row['id'] . "'>";
+                    echo "<button class='button_catalogo' type='submit'>Agendar</button>";
+                    echo "</form>";
+                    echo "</div>";
+                }
             }
         } else {
             echo "<p>Nenhum produto disponível para agendamento.</p>";

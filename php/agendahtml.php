@@ -1,6 +1,8 @@
 <?php
 include_once("conexao.php");
 
+include_once("../php/verificaSession.php");
+
 if (isset($_POST['id_produto'])) {
     $id_produto = $_POST['id_produto'];
 

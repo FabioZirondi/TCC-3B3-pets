@@ -6,6 +6,10 @@ if (isset($_POST['id_produto'])) {
 
     // Consulta para obter o id_vendedor com base no id_produto
     $sql_id_vendedor = $conn->prepare("SELECT cod_vendedor FROM produtos WHERE id = ?");
+    if (!$sql_id_vendedor) {
+        // Erro na preparação da consulta
+        die("Erro na preparação da consulta: " . $conn->error);
+    }
     $sql_id_vendedor->bind_param("i", $id_produto);
     $sql_id_vendedor->execute();
 
@@ -21,11 +25,32 @@ if (isset($_POST['id_produto'])) {
 
 $status = 'D';
 
-$produto = null;
 $horarios_disponiveis = [];
 
-if ($id_produto) {
+if (isset($id_produto)) {
+    // Consulta para obter informações do produto
+    $sql_produto = $conn->prepare("SELECT * FROM produtos WHERE id = ?");
+    if (!$sql_produto) {
+        // Erro na preparação da consulta
+        die("Erro na preparação da consulta: " . $conn->error);
+    }
+    $sql_produto->bind_param("i", $id_produto);
+    $sql_produto->execute();
+
+    $result_produto = $sql_produto->get_result();
+
+    if ($result_produto->num_rows > 0) {
+        $produto = $result_produto->fetch_assoc();
+    }
+
+    $sql_produto->close();
+
+    // Consulta para obter os horários disponíveis
     $sql_horarios = $conn->prepare("SELECT * FROM horarios_disponiveis WHERE id_produto = ? AND `status` = ?");
+    if (!$sql_horarios) {
+        // Erro na preparação da consulta
+        die("Erro na preparação da consulta: " . $conn->error);
+    }
     $sql_horarios->bind_param("is", $id_produto, $status);
     $sql_horarios->execute();
 
@@ -37,21 +62,9 @@ if ($id_produto) {
             $horario = $row_horario['horario'];
             $horarios_disponiveis[$dia][] = $horario;
         }
-
-        $sql_produto = $conn->prepare("SELECT * FROM produtos WHERE id = ?");
-        $sql_produto->bind_param("i", $id_produto);
-        $sql_produto->execute();
-
-        $result_produto = $sql_produto->get_result();
-
-        if ($result_produto->num_rows > 0) {
-            $produto = $result_produto->fetch_assoc();
-        }
     }
 
     $sql_horarios->close();
-    $sql_produto->close();
-    $conn->close();
 }
 ?>
 
@@ -106,7 +119,6 @@ if ($id_produto) {
                 if ($produto && $horarios_disponiveis) {
 
                     foreach ($horarios_disponiveis as $dia => $horarios) {
- 
                         $dia_formatado = DateTime::createFromFormat('dmY', $dia)->format('m/d/y');
 
                         echo "<h3>{$dia_formatado}</h3>";

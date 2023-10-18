@@ -18,8 +18,7 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Montserrat:wght@100;200&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Montserrat:wght@100;200&display=swap" rel="stylesheet">
     <title>Catálogo</title>
 </head>
 <script src="../js/HomePage.js"></script>
@@ -68,8 +67,12 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
         echo "<div class='card-container'>";
         include '../php/conexao.php';
 
-        $sql = "SELECT * FROM produtos";
-        
+        $sql = "SELECT p.id, p.nome_produto, p.descricao, p.preco, p.imagem_nome_uniq
+                FROM produtos p
+                INNER JOIN horarios_disponiveis hd ON p.id = hd.id_produto
+                WHERE hd.status = 'D'
+                GROUP BY p.id";
+
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -86,14 +89,15 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
                 echo "</div>";
             }
         } else {
-            echo "<p>Nenhum produto cadastrado.</p>";
+            echo "<p>Nenhum produto disponível para agendamento.</p>";
         }
 
         $conn->close();
         ?>
 
-        </div>
+    </div>
     </main>
+    <footer>
     <footer>
         <h1>I-Pet</h1>
         <p>I-pet@gmail.com</p>
@@ -104,6 +108,7 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
             <a href="https://web.telegram.org/a/"><img src="../img/icon-telegram.png" alt="Telegram"></a>
         </div>
         <p>&copy; 2023. Todos os direitos reservados.</p>
+    </footer>
     </footer>
 </body>
 

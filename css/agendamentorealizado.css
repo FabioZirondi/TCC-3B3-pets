@@ -12,3 +12,8 @@
   .striped-table tr:nth-child(even) {
     background-color: #cecece;
   }
+
+
+  main {
+    overflow: scroll;
+  }

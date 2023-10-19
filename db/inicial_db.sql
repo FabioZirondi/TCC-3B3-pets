@@ -1,3 +1,7 @@
+create database pets;
+
+use pets;
+
 create table usuario (
 	cod int PRIMARY KEy AUTO_INCREMENT,
     nome varchar(40),

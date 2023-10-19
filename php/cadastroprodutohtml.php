@@ -41,13 +41,6 @@ $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
             <form class="container-form" action="../php/cadastroproduto.php" method="POST"
                 enctype="multipart/form-data">
                 <h1>Cadastro de produtos</h1>
-                <div class="mensagemerro"><b>
-                        <?php
-                        if (isset($erro)) {
-                            echo "<p>" . $erro . "</p>";
-                        }
-                        ?>
-                    </b></div>
                 <div class="mensagemdesucesso"><b>
                         <?php
                         if (isset($sucesso)) {
@@ -55,6 +48,13 @@ $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
                         }
                         ?>
                 </b></div>
+                <div class="mensagemerro"><b>
+                        <?php
+                        if (isset($erro)) {
+                            echo "<p>" . $erro . "</p>";
+                        }
+                        ?>
+                    </b></div>
                 <hr>
 
                 <label for="nomeprod"><b>Título</b></label>

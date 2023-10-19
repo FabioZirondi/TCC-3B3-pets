@@ -80,16 +80,23 @@ $result_agendamentos = $sql_agendamentos->get_result();
             ?>
         </table>
     </main>
-
     <footer>
-        <!-- O conteúdo do rodapé permanece o mesmo -->
+        <h1>I-Pet</h1>
+        <p>I-pet@gmail.com</p>
+        <div class="social-icons">
+            <a href="https://pt-br.facebook.com/"><img src="../img/icon-facebook.png" alt="Facebook"></a>
+            <a href="https://twitter.com/"><img src="../img/icon-twitter.png" alt="Twitter"></a>
+            <a href="https://br.linkedin.com/"><img src="../img/icon-linkedin.png" alt="LinkedIn"></a>
+            <a href="https://web.telegram.org/a/"><img src="../img/icon-telegram.png" alt="Telegram"></a>
+        </div>
+        <p>&copy; 2023. Todos os direitos reservados.</p>
     </footer>
+    <script src="../js/HomePage.js"></script>
 </body>
 
 </html>
 
 <?php
-// Lembre-se de fechar a consulta e a conexão após usá-las
 $sql_agendamentos->close();
 $conn->close();
 ?>

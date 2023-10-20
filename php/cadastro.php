@@ -57,6 +57,15 @@ if ($tipo_usuario === 'v') {
         }
         exit;
     }
+
+    include_once("../php/verificaCNPJ.php");
+
+    // Verifica se o CNPJ é válido
+    if (!validarCnpj($cnpj)) {
+        $erro = "CNPJ inválido.";
+        header("Location: ../php/cadastrohtml.php?erro=" . urlencode($erro));
+        exit;
+    }
     // Inserção do vendedor no banco de dados
     $stmt = "INSERT INTO vendedor (nome, email, senha, telefone, nomeemp, cnpj, tipo) VALUES ('$nome', '$email', '$senha_hash', '$numero', '$nomeemp', '$cnpj', 'v')";
 } elseif ($tipo_usuario === 'u') {

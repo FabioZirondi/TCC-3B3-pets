@@ -75,13 +75,13 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
                     <div id="camposVendedor" style="display: none;">
 
                         <label for="telefone"><b>Telefone</b></label>
-                        <input type="text" id="telefone" name="numero" placeholder="(xx) xxxxx-xxxx" >
+                        <input type="text" id="cad-tel" name="numero" placeholder="(xx) xxxxx-xxxx" >
 
                         <label for="nomeemp"><b>Nome da sua empresa</b></label>
                         <input type="text" placeholder="Empresa" name="nomeemp" id="nomeemp" >
 
                         <label for="cnpj"><b>CNPJ</b></label>
-                        <input type="text" placeholder="CNPJ" placeholder="XX.XXX.XXX/0001-XX." name="cnpj" id="cnpj">
+                        <input type="text" id="cnpj" placeholder="XX.XXX.XXX/0001-XX." name="cnpj" id="cnpj">
                     </div>
                     <hr>
                     <button type="submit" class="registerbtn">Register</button>
@@ -91,7 +91,6 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
                     if (isset($erro)) {
                         echo "<p><b>" . $erro . "</b></p>";
                     }
-
                     ?>
                     </div>
                     <p>já possuí conta? <a href="../php/login.php">Login</a>.</p>

@@ -75,7 +75,7 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
                     <div id="camposVendedor" style="display: none;">
 
                         <label for="telefone"><b>Telefone</b></label>
-                        <input type="text" id="cad-tel" name="numero" placeholder="(xx) xxxxx-xxxx" >
+                        <input type="text" id="cad-tel" name="numero" placeholder="+55 (xx) xxxxx-xxxx" >
 
                         <label for="nomeemp"><b>Nome da sua empresa</b></label>
                         <input type="text" placeholder="Empresa" name="nomeemp" id="nomeemp" >

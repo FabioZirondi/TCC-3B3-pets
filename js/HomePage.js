@@ -33,7 +33,7 @@ function formatarTelefone() {
   let numeroLimpo = telefone.value.replace(/\D/g, '');
 
   // Limita o número de caracteres para 11
-  numeroLimpo = numeroLimpo.substr(0, 11);
+  numeroLimpo = numeroLimpo.substr(0, 13);
 
   // Formata o número de telefone no padrão desejado: +55 (00) 00000-0000
   let formatoTelefone = '';
@@ -42,9 +42,9 @@ function formatarTelefone() {
       formatoTelefone += `+${numeroLimpo[i]}`;
     } else if (i === 2) {
       formatoTelefone += ` (${numeroLimpo[i]}`;
-    } else if (i === 7) {
+    } else if (i === 4) {
       formatoTelefone += `) ${numeroLimpo[i]}`;
-    } else if (i === 9) {
+    } else if (i ===9) {
       formatoTelefone += `-${numeroLimpo[i]}`;
     } else {
       formatoTelefone += numeroLimpo[i];

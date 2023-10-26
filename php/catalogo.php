@@ -108,90 +108,9 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
         } else {
             echo "<p>Nenhum produto disponível para agendamento.</p>";
         }
-        $sql = "SELECT p.id, p.nome_produto, p.descricao, p.preco, p.imagem_nome_uniq, v.nomeemp 
-        FROM produtos p
-        INNER JOIN horarios_disponiveis hd ON p.id = hd.id_produto
-        INNER JOIN vendedor v ON p.cod_vendedor = v.cod
-        WHERE hd.status = 'D'
-        GROUP BY p.id";
-
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                if ($_SESSION['usuario'] == 'v') {
-                    echo "<div class='card'>";
-                    echo "<img src='../imagemprodutos/{$row['imagem_nome_uniq']}' alt='{$row['descricao']}' style='width:100%'>";
-                    echo "<h2>{$row['nome_produto']}</h2>";
-                    echo "<h4>{$row['descricao']}</h4>";
-                    echo "<h4> empresa: </h4>";
-                    echo "<h4>{$row['nomeemp']}</h4>";
-                    echo "<p class='preco'>R$ {$row['preco']}</p>"; 
-                    echo "<h4 style='color: red;'><b>Apenas para usuários</b></h4>";
-                    echo "</form>";
-                    echo "</div>";
-                }else{
-                    echo "<div class='card'>";
-                    echo "<img src='../imagemprodutos/{$row['imagem_nome_uniq']}' alt='{$row['descricao']}' style='width:100%'>";
-                    echo "<h2>{$row['nome_produto']}</h2>";
-                    echo "<h4>{$row['descricao']}</h4>";
-                    echo "<h4> empresa </h4>";
-                    echo "<h4>{$row['nomeemp']}</h4>";
-                    echo "<p class='preco'>R$ {$row['preco']}</p>";
-                    echo "<form action='../php/agendahtml.php' method='POST'>";
-                    echo "<input type='hidden' name='id_produto' value='" . $row['id'] . "'>";
-                    echo "<button class='button_catalogo' type='submit'>Agendar</button>";
-                    echo "</form>";
-                    echo "</div>";
-                }
-            }
-        } else {
-            echo "<p>Nenhum produto disponível para agendamento.</p>";
-        }
-        $sql = "SELECT p.id, p.nome_produto, p.descricao, p.preco, p.imagem_nome_uniq, v.nomeemp 
-        FROM produtos p
-        INNER JOIN horarios_disponiveis hd ON p.id = hd.id_produto
-        INNER JOIN vendedor v ON p.cod_vendedor = v.cod
-        WHERE hd.status = 'D'
-        GROUP BY p.id";
-
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                if ($_SESSION['usuario'] == 'v') {
-                    echo "<div class='card'>";
-                    echo "<img src='../imagemprodutos/{$row['imagem_nome_uniq']}' alt='{$row['descricao']}' style='width:100%'>";
-                    echo "<h2>{$row['nome_produto']}</h2>";
-                    echo "<h4>{$row['descricao']}</h4>";
-                    echo "<h4> empresa: </h4>";
-                    echo "<h4>{$row['nomeemp']}</h4>";
-                    echo "<p class='preco'>R$ {$row['preco']}</p>"; 
-                    echo "<h4 style='color: red;'><b>Apenas para usuários</b></h4>";
-                    echo "</form>";
-                    echo "</div>";
-                }else{
-                    echo "<div class='card'>";
-                    echo "<img src='../imagemprodutos/{$row['imagem_nome_uniq']}' alt='{$row['descricao']}' style='width:100%'>";
-                    echo "<h2>{$row['nome_produto']}</h2>";
-                    echo "<h4>{$row['descricao']}</h4>";
-                    echo "<h4> empresa </h4>";
-                    echo "<h4>{$row['nomeemp']}</h4>";
-                    echo "<p class='preco'>R$ {$row['preco']}</p>";
-                    echo "<form action='../php/agendahtml.php' method='POST'>";
-                    echo "<input type='hidden' name='id_produto' value='" . $row['id'] . "'>";
-                    echo "<button class='button_catalogo' type='submit'>Agendar</button>";
-                    echo "</form>";
-                    echo "</div>";
-                }
-            }
-        } else {
-            echo "<p>Nenhum produto disponível para agendamento.</p>";
-        }
-
         $conn->close();
         ?>
-
+        
     </div>
     </main>
     <footer>

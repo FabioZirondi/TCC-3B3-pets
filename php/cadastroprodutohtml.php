@@ -19,7 +19,7 @@ $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Montserrat:wght@100;200&display=swap"
         rel="stylesheet">
-    <title>Página Inicial</title>
+    <title>Cadastro Produto</title>
 </head>
 
 <body>
@@ -27,7 +27,7 @@ $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
         <div class="topnav" id="myTopnav">
             <a href="../php/HomePage.php" class="active">I-Pet</a>
             <a href="../php/logout.php"> <button class="button" type="button">Sair</button></a>
-            <a href="../php/telavendedor.php">Produtos</a>
+            <a href="../php/telavendedor.php">Serviços</a>
             <a href="#sobre">Sobre</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <i class="fa fa-bars"></i>
@@ -40,7 +40,7 @@ $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
         <div class="form">
             <form class="container-form" action="../php/cadastroproduto.php" method="POST"
                 enctype="multipart/form-data">
-                <h1>Cadastro de produtos</h1>
+                <h1>Cadastro de agendamentos</h1>
                 <div class="mensagemdesucesso"><b>
                         <?php
                         if (isset($sucesso)) {
@@ -58,7 +58,7 @@ $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
                 <hr>
 
                 <label for="nomeprod"><b>Título</b></label>
-                <input type="text" placeholder="Título do produto" name="nomeprod" id="nomeprod" required>
+                <input type="text" placeholder="Título do agendamento" name="nomeprod" id="nomeprod" required>
 
                 <label for="desc"><b>Descrição</b></label>
                 <input type="text" placeholder="Descrição" name="desc" id="desc" required>

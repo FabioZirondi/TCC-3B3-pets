@@ -107,10 +107,9 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
         } else {
             echo "<p>Nenhum produto disponível para agendamento.</p>";
         }
-
         $conn->close();
         ?>
-
+        
     </div>
     </main>
     <footer>

@@ -7,7 +7,8 @@ create table usuario (
     nome varchar(40),
     email varchar(40),
     senha varchar(255),
-    tipo char(1)
+    tipo char(1),
+    telefone varchar(20)
 ) AUTO_INCREMENT = 1;
 
 create table vendedor(

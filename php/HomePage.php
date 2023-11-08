@@ -1,7 +1,19 @@
 <?php
-
 include_once("../php/verificaSessionPagInicial.php");
 
+include_once("../php/conexao.php");
+
+// Consulta para obter os 3 últimos agendamentos
+$sql_agendamentos = $conn->prepare("SELECT a.id, u.nome, p.nome_produto, h.data_agendamento, h.horario, a.status, p.imagem_nome_uniq
+                                    FROM agendamentos a 
+                                    INNER JOIN produtos p ON a.id_produto = p.id
+                                    INNER JOIN horarios_disponiveis h ON a.id_produto = h.id_produto AND a.horario = h.horario
+                                    INNER JOIN usuario u ON a.id_usuario = u.cod
+                                    ORDER BY a.id DESC
+                                    LIMIT 3");
+$sql_agendamentos->execute();
+
+$result_agendamentos = $sql_agendamentos->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +52,8 @@ include_once("../php/verificaSessionPagInicial.php");
                 <h1 class="text_main">Bem-Vindo!</h1>
                 <p class="text_main">Nosso site foi desenvolvido para facilitar agendamentos de serviços para seu Pet.
                 </p>
-                <a href="../php/cadastrohtml.php"><button class="button_main text_main" type="submit">Inscreva-se</button></a>
+                <a href="../php/cadastrohtml.php"><button class="button_main text_main"
+                        type="submit">Inscreva-se</button></a>
             </div>
         </div>
 
@@ -49,41 +62,31 @@ include_once("../php/verificaSessionPagInicial.php");
         <div class="background_card">
             <h1 style="text-align: center;margin-top: 50px;">Nossos serviços</h1>
             <div class="container_cards">
-                <div class="card">
-                    <img src="https://static.wixstatic.com/media/11062b_73641fdcc7974ff387adf65f2bcc8bf9~mv2.jpg/v1/fill/w_364,h_364,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_auto/11062b_73641fdcc7974ff387adf65f2bcc8bf9~mv2.jpg"
-                        alt="Avatar" style="width:100%">
-                    <div class="container_card">
-                        <h4><b>Banho</b></h4>
-                        <hr>
-                        <p>1h</p>
-                        <button class="button_card" src="#">Agendar agora!</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://static.wixstatic.com/media/11062b_d683e351d75a49c3bcf30051902027b8~mv2.jpg/v1/fill/w_563,h_563,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_auto/11062b_d683e351d75a49c3bcf30051902027b8~mv2.jpg"
-                        alt="Avatar" style="width:100%">
-                    <div class="container_card">
-                        <h4><b>Tosa Higiênica</b></h4>
-                        <hr>
-                        <p>1h</p>
-                        <button class="button_card" src="#">Agendar agora!</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://static.wixstatic.com/media/9c6757_4f0a4ce526df417894139de4368cc05c~mv2.jpeg/v1/fill/w_563,h_563,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_auto/9c6757_4f0a4ce526df417894139de4368cc05c~mv2.jpeg"
-                        alt="Avatar" style="width:100%">
-                    <div class="container_card">
-                        <h4><b>Hospedagem Pet</b></h4>
-                        <hr>
-                        <p>1h</p>
-                        <button class="button_card" src="#">Agendar agora!</button>
-                    </div>
-                </div>
+                <?php
+                if ($result_agendamentos->num_rows > 0) {
+                    while ($row = $result_agendamentos->fetch_assoc()) {
+                        $dia_string = str_pad($row['data_agendamento'], 8, '0', STR_PAD_LEFT);
+                        $data_formatada = DateTime::createFromFormat('dmY', $dia_string)->format('d/m/y');
+                        echo '<div class="card">';
+                        echo '<img src="../imagemprodutos/' . $row['imagem_nome_uniq'] . '" alt="Avatar" style="width:100%">';
+                        echo '<div class="container_card">';
+                        echo '<h4><b>' . $row['nome_produto'] . '</b></h4>';
+                        echo '<hr>';
+                        echo '<p>' . $data_formatada . ' | ' . $row['horario'] . '</p>';
+                        echo '<button class="button_card" src="#">Agendar agora!</button>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                } else {
+                   
+                    echo '<p>Não há produtos disponíveis para agendamento no momento.</p>';
+                }
+                ?>
             </div>
         </div>
 
         <!-- Sobre nós -->
-        
+
         <div class="container_about">
             <div class="container_img_about">
                 <div class="sobrenos_img">

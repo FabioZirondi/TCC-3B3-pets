@@ -42,7 +42,6 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
                 echo "<a href='../php/agendamentosRealizados.php'>Seus agendamentos</a>";
             }
             ?>
-            <a href="#sobre">Sobre</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <i class="fa fa-bars"></i>
             </a>

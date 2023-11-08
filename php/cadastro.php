@@ -19,7 +19,7 @@ $cnpj = mysqli_real_escape_string($conn, $cnpj);
 $nomeemp = mysqli_real_escape_string($conn, $nomeemp);
 
 // Verifica se algum campo está vazio
-if (empty($nome) || empty($email) || empty($senha)) {
+if (empty($nome) || empty($email) || empty($senha) || empty($numero)) {
     $erro = "Erro: Todos os campos obrigatórios devem estar preenchidos.";
     if (isset($erro)) {
         header("Location: ../php/cadastrohtml.php?erro=" . urlencode($erro));
@@ -49,7 +49,7 @@ $senha_hash = password_hash($senha, PASSWORD_DEFAULT, $options);
 
 if ($tipo_usuario === 'v') {
     // Se for um vendedor, verifique os campos relevantes
-    if (empty($numero) || empty($nomeemp) || empty($cnpj)) {
+    if (empty($nomeemp) || empty($cnpj)) {
         $erro = "Todos os campos obrigatórios para vendedores devem estar preenchidos.";
         if (isset($erro)) {
             header("Location: ../php/cadastrohtml.php?erro=" . urlencode($erro));
@@ -70,7 +70,7 @@ if ($tipo_usuario === 'v') {
     $stmt = "INSERT INTO vendedor (nome, email, senha, telefone, nomeemp, cnpj, tipo) VALUES ('$nome', '$email', '$senha_hash', '$numero', '$nomeemp', '$cnpj', 'v')";
 } elseif ($tipo_usuario === 'u') {
     // Se for um usuário normal
-    $stmt = "INSERT INTO usuario (nome, email, senha, tipo) VALUES ('$nome', '$email', '$senha_hash', 'u')";
+    $stmt = "INSERT INTO usuario (nome, email, senha, tipo, telefone) VALUES ('$nome', '$email', '$senha_hash', 'u', '$numero')";
 } else {
     // Tipo de usuário inválido
     $erro = "Tipo de usuário inválido.";

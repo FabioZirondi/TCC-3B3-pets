@@ -65,8 +65,12 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
                     <label for="email"><b>Email</b></label>
                     <input type="email" placeholder="Email" name="email" id="email" required>
 
+                    <label for="telefone"><b>Telefone</b></label>
+                    <input type="text" id="cad-tel" name="numero" placeholder="+55 (xx) xxxxx-xxxx" >
+                    
                     <label for="senha"><b>Senha</b></label>
                     <input type="password" placeholder="Senha" name="senha" id="senha" minlength="8" required>
+                    
 
                     <input class="checkbox" type="checkbox" id="vendedor" name="vendedor" value="v">
                     <label for="">Cadastro para vendedores</label>
@@ -74,8 +78,6 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
 
                     <div id="camposVendedor" style="display: none;">
 
-                        <label for="telefone"><b>Telefone</b></label>
-                        <input type="text" id="cad-tel" name="numero" placeholder="+55 (xx) xxxxx-xxxx" >
 
                         <label for="nomeemp"><b>Nome da sua empresa</b></label>
                         <input type="text" placeholder="Empresa" name="nomeemp" id="nomeemp" >

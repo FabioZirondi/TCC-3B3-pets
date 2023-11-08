@@ -6,8 +6,8 @@ include_once("../php/verificaSession.php");
 // Obtém o id do vendedor da sessão
 $id_vendedor = $_SESSION['codigo_usuario_vendedor'];
 
-// Consulta para obter os agendamentos relacionados ao vendedor
-$sql_agendamentos = $conn->prepare("SELECT a.id, u.nome, p.nome_produto, h.data_agendamento, h.horario, a.status 
+// Consulta para obter os agendamentos relacionados ao vendedor, incluindo o telefone do usuário
+$sql_agendamentos = $conn->prepare("SELECT a.id, u.nome, u.telefone, p.nome_produto, h.data_agendamento, h.horario, a.status 
                                     FROM agendamentos a 
                                     INNER JOIN produtos p ON a.id_produto = p.id
                                     INNER JOIN horarios_disponiveis h ON a.id_produto = h.id_produto AND a.horario = h.horario
@@ -57,6 +57,7 @@ $result_agendamentos = $sql_agendamentos->get_result();
             <tr>
                 <th>Produto</th>
                 <th>Cliente</th>
+                <th>Telefone</th>
                 <th>Data do Agendamento</th>
                 <th>Horário</th>
                 <th>Status</th>
@@ -65,13 +66,13 @@ $result_agendamentos = $sql_agendamentos->get_result();
             <?php
             
             while ($row = $result_agendamentos->fetch_assoc()) {
-                
                 $dia_string = str_pad($row['data_agendamento'], 8, '0', STR_PAD_LEFT);
                 $data_formatada = DateTime::createFromFormat('dmY', $dia_string)->format('d/m/y');
                 
                 echo "<tr>";
                 echo "<td>" . $row['nome_produto'] . "</td>";
                 echo "<td>" . $row['nome'] . "</td>";
+                echo "<td>" . $row['telefone'] . "</td>";
                 echo "<td>" . $data_formatada . "</td>";
                 echo "<td>" . $row['horario'] . "</td>";
                 echo "<td>" . ($row['status'] === 'A' ? 'Agendado' : $row['status']) . "</td>";

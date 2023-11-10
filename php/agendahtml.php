@@ -121,9 +121,8 @@ if (isset($id_produto)) {
                 if ($produto && $horarios_disponiveis) {
 
                     foreach ($horarios_disponiveis as $dia => $horarios) {
-                        $dia_formatado = DateTime::createFromFormat('dmY', $dia)->format('m/d/y');
 
-                        echo "<h3>{$dia_formatado}</h3>";
+                        echo "<h3>{$dia}</h3>";
                         echo "<form action='../php/agenda.php' method='POST'>";
                         echo "<label for='horario'><b>Escolha um horário:</b></label>";
                         echo "<select name='horario' id='horario'>";

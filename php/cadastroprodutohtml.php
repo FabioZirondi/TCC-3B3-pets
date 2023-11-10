@@ -76,7 +76,7 @@ $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
                 <p>Quais horários ficaram disponíveis?</p>
 
                 <label for="dia"><b>Dia do agendamento</b></label>
-                <input type="number" placeholder="Dia" name="dia" id="dia" required>
+                <input type="date" placeholder="Dia" name="dia" id="dia" required>
 
                 <p>Horários</p>
 

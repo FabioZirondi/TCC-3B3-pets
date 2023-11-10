@@ -96,15 +96,17 @@ if (!in_array($tipo_imagem, $tipo_permitido)) {
             //CADASTRO DE HORÁRIOS
             $_SESSION['id_produto'] = $ultimoID;
 
+            $dia_formatado = date('d/m/y', strtotime($dia));
+
             foreach ($horarios as $horario) {
                 $sql_inserir_horario = "INSERT INTO horarios_disponiveis (id_produto, data_agendamento, horario, status) VALUES (?, ?, ?, 'D')";
                 $stmt_inserir_horario = $conn->prepare($sql_inserir_horario);
-                $stmt_inserir_horario->bind_param("iis", $ultimoID, $dia, $horario);
+                $stmt_inserir_horario->bind_param("iss", $ultimoID, $dia_formatado, $horario);
                 $stmt_inserir_horario->execute();
             }
 
             $stmt_inserir_horario->close();
-            $sucesso = "Informações enviadas com sucesso.";
+            $sucesso = "Informações enviadas com sucesso. $dia";
             header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($sucesso));
             exit;
         } else {

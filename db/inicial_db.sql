@@ -41,7 +41,7 @@ CREATE TABLE produtos (
 CREATE TABLE horarios_disponiveis (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_produto INT,
-    data_agendamento int,
+    data_agendamento varchar(20),
     horario time,
     status CHAR(1),
     CONSTRAINT fk_id_produto_horarios

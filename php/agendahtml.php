@@ -91,7 +91,7 @@ if (isset($id_produto)) {
 <body>
     <header>
         <div class="topnav" id="myTopnav">
-            <a href="../php/HomePage.php" class="active">I-Pet</a>
+            <a href="../php/HomePage.php" class="active">PetVitrine</a>
             <a href="../php/logout.php"><button class="button" type="button">Sair</button></a>
             <a href="#sobre">Sobre</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">

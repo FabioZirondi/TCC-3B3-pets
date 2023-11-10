@@ -47,7 +47,7 @@ if (!$result) {
 <body>
     <header>
         <div class="topnav" id="myTopnav">
-            <a href="../php/HomePage.php" class="active">I-Pet</a>
+            <a href="../php/HomePage.php" class="active">PetVitrine</a>
             <a href="../php/logout.php"> <button class="button" type="button">Sair</button></a>
             <a href="../php/cadastroprodutohtml.php">Cadastrar Produto</a>
             <a href="../php/catalogo.php">Catalogo</a>
@@ -76,13 +76,13 @@ if (!$result) {
                     echo "<td>";
                     echo "<form method='POST' action='apagarproduto.php' style='display: inline;'>";
                     echo "<input type='hidden' name='produto_id' value='" . $id_produto . "'>";
-                    echo "<button type='submit'>Apagar</button>";
+                    echo "<button type='submit' class='buttoneditapagar'><i class='fa fa-trash'></i> Apagar</button>";
                     echo "</form>";
                     echo "</td>";
                     echo "<td>";
                     echo "<form method='POST' action='../php/editarprodutohtml.php' '>";
                     echo "<input type='hidden' name='id_produto' value='" . $id_produto . "'>";
-                    echo "<button type='submit'>Editar</button>";
+                    echo "<button type='submit' class='buttoneditapagar'><i class='fa fa-pencil'></i> Editar</button>";
                     echo "</form>";
                     echo "</td>";
                     echo "</tr>";

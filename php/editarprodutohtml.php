@@ -30,7 +30,7 @@ $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
 <body>
     <header>
         <div class="topnav" id="myTopnav">
-            <a href="../php/HomePage.php" class="active">I-Pet</a>
+            <a href="../php/HomePage.php" class="active">PetVitrine</a>
             <a href="../php/logout.php"> <button class="button" type="button">Sair</button></a>
             <a href="../php/telavendedor.php">Produtos</a>
             <a href="#sobre">Sobre</a>

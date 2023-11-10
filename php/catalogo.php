@@ -26,7 +26,7 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
 <body>
     <header>
         <div class="topnav" id="myTopnav">
-            <a href="../php/HomePage.php" class="active">I-Pet</a>
+            <a href="../php/HomePage.php" class="active">PetVitrine</a>
             <a href="../php/logout.php"> <button class="button" type="button">Sair</button></a>
             <?php
 
@@ -83,8 +83,7 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
                     echo "<img src='../imagemprodutos/{$row['imagem_nome_uniq']}' alt='{$row['descricao']}' style='width:100%'>";
                     echo "<h2>{$row['nome_produto']}</h2>";
                     echo "<h4>{$row['descricao']}</h4>";
-                    echo "<h4> empresa: </h4>";
-                    echo "<h4>{$row['nomeemp']}</h4>";
+                    echo "<h4>empresa: {$row['nomeemp']}</h4>";
                     echo "<p class='preco'>R$ {$row['preco']}</p>"; 
                     echo "<h4 style='color: red;'><b>Apenas para usuários</b></h4>";
                     echo "</form>";

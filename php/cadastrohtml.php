@@ -28,7 +28,7 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
     <header>
         <!-- NavBar -->
         <div class="topnav" id="myTopnav">
-            <a href="../php/HomePage.php" class="active">I-Pet</a>
+            <a href="../php/HomePage.php" class="active">PetVitrine</a>
             <a href="../php/login.php"> <button class="button" type="button">Login</button></a>
             <a href="#sobre">Sobre</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">

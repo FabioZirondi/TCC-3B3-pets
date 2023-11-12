@@ -64,21 +64,18 @@ $result_agendamentos = $sql_agendamentos->get_result();
             </tr>
 
             <?php
-            
             while ($row = $result_agendamentos->fetch_assoc()) {
-                $dia_string = str_pad($row['data_agendamento'], 8, '0', STR_PAD_LEFT);
-                $data_formatada = DateTime::createFromFormat('dmY', $dia_string)->format('d/m/y');
-                
                 echo "<tr>";
                 echo "<td>" . $row['nome_produto'] . "</td>";
                 echo "<td>" . $row['nome'] . "</td>";
                 echo "<td>" . $row['telefone'] . "</td>";
-                echo "<td>" . $data_formatada . "</td>";
+                echo "<td>" . $row['data_agendamento'];;
                 echo "<td>" . $row['horario'] . "</td>";
                 echo "<td>" . ($row['status'] === 'A' ? 'Agendado' : $row['status']) . "</td>";
                 echo "</tr>";
             }
             ?>
+            
         </table>
     </main>
     <footer>

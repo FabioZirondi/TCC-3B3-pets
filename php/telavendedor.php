@@ -47,7 +47,7 @@ if (!$result) {
 <body>
     <header>
         <div class="topnav" id="myTopnav">
-            <a href="../php/HomePage.php" class="active">PetVitrine</a>
+            <a href="../index.php" class="active">PetVitrine</a>
             <a href="../php/logout.php"> <button class="button" type="button">Sair</button></a>
             <a href="../php/cadastroprodutohtml.php">Cadastrar Produto</a>
             <a href="../php/catalogo.php">Catalogo</a>

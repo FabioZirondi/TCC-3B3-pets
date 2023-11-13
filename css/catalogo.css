@@ -1,7 +1,7 @@
 .card-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  grid-gap: 5px;
+  grid-gap: 0;
   justify-items: center;
   row-gap: 40px;
 }
@@ -9,7 +9,7 @@
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   height: 100%;
-  margin: auto;
+  margin: 0; /* Removendo a margem para ajuste lateral */
   text-align: center;
   margin-bottom: 30px;
   display: grid;
@@ -45,10 +45,9 @@
   transition: background-color .10s;
   border: none;
 }
+
 @media screen and (max-width: 900px) {
   .button_catalogo {
     margin-bottom: 20px;
   }
-
 }
-

@@ -85,7 +85,9 @@ hr {
 input[type="text"],
 input[type="number"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="date"]
+ {
   width: -webkit-fill-available;
   border-radius: 10px;
   padding: 15px;
@@ -99,14 +101,16 @@ input[type="password"] {
 input[type="text"]:hover,
 input[type="number"]:hover,
 input[type="email"]:hover,
-input[type="password"]:hover {
+input[type="password"]:hover,
+input[type="date"]:hover {
   border: solid 2px black;
 }
 
 input[type="text"]:focus,
 input[type="number"]:focus,
 input[type="email"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+input[type="date"]:focus {
   background-color: #ddd;
   outline: none;
 }

@@ -101,7 +101,7 @@ if (mysqli_query($conn, $stmt)) {
     }
 } else {
     echo "Erro ao cadastrar-se <br>" . mysqli_error($conn);
-    echo "<br><a href='../php/homepage.php'>Voltar</a>";
+    echo "<br><a href='../index.php'>Voltar</a>";
 }
 
 mysqli_close($conn);

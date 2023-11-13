@@ -39,7 +39,7 @@ $result_agendamentos = $sql_agendamentos->get_result();
 <body>
     <header>
         <div class="topnav" id="myTopnav">
-            <a href="../php/HomePage.php" class="active">PetVitrine</a>
+            <a href="../index.php" class="active">PetVitrine</a>
             <a href="../php/logout.php"> <button class="button" type="button">Sair</button></a>
             <a href="../php/catalogo.php">Catálogo</a>
             <a href="#sobre">Sobre</a>

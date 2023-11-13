@@ -106,8 +106,8 @@ if (!in_array($tipo_imagem, $tipo_permitido)) {
             }
 
             $stmt_inserir_horario->close();
-            $sucesso = "Informações enviadas com sucesso. $dia";
-            header("Location: ../php/cadastroprodutohtml.php?erro=" . urlencode($sucesso));
+            $sucesso = "Informações enviadas com sucesso.";
+            header("Location: ../php/cadastroprodutohtml.php?sucesso=" . urlencode($sucesso));
             exit;
         } else {
             $erro = "Erro ao enviar a imagem: " . $stmt->error;

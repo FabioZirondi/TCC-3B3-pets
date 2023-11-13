@@ -58,10 +58,13 @@ if (isset($_POST['produto_id'])) {
         $stmt_delete_horarios->close();
 
         // Inserir novos horários associados a este produto
+
+        $dia_formatado = date('d/m/y', strtotime($dia));
+
         foreach ($horarios as $horario) {
             $sql_inserir_horario = "INSERT INTO horarios_disponiveis (id_produto, data_agendamento, horario, status) VALUES (?, ?, ?, 'D')";
             $stmt_inserir_horario = $conn->prepare($sql_inserir_horario);
-            $stmt_inserir_horario->bind_param("iss", $id_produto, $dia, $horario);
+            $stmt_inserir_horario->bind_param("iss", $id_produto, $dia_formatado, $horario);
             $stmt_inserir_horario->execute();
             $stmt_inserir_horario->close();
         }

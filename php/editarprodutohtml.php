@@ -30,7 +30,7 @@ $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
 <body>
     <header>
         <div class="topnav" id="myTopnav">
-            <a href="../php/HomePage.php" class="active">PetVitrine</a>
+            <a href="../index.php" class="active">PetVitrine</a>
             <a href="../php/logout.php"> <button class="button" type="button">Sair</button></a>
             <a href="../php/telavendedor.php">Produtos</a>
             <a href="#sobre">Sobre</a>
@@ -82,7 +82,7 @@ $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
                 <p><b>Quais horários ficaram disponíveis?</p>
 
                 <label for="dia"><b>Dia do agendamento</b></label>
-                <input type="number" placeholder="Dia" name="dia" id="dia" required>
+                <input type="date" placeholder="Dia" name="dia" id="dia" required>
 
                 <p><b>Horários</b></p>
 

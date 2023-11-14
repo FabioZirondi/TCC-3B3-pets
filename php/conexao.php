@@ -1,9 +1,9 @@
 <?php
 
-$servidor = "localhost";
-$usuario = "root";
-$senha = "";
-$bd = "pets";
+$servidor = "db4free.net";
+$usuario = "fahzibernardelli";
+$senha = "fabio0010w";
+$bd = "petvitrine";
 
 $conn = mysqli_connect($servidor, $usuario, $senha, $bd);
 

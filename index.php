@@ -11,7 +11,7 @@ $sql_produtos = $conn->prepare("SELECT
                                     p.preco, 
                                     p.imagem_nome_uniq, 
                                     v.nomeemp, 
-                                    hd.data_agendamento
+                                    MAX(hd.data_agendamento) as data_agendamento
                                 FROM produtos p
                                 LEFT JOIN vendedor v ON p.cod_vendedor = v.cod
                                 LEFT JOIN horarios_disponiveis hd ON p.id = hd.id_produto
@@ -33,6 +33,7 @@ $result_produtos = $sql_produtos->get_result();
     <link rel="stylesheet" href="./css/HomePage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="./img/iconpet.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Montserrat:wght@100;200&display=swap"
         rel="stylesheet">

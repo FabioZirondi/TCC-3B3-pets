@@ -16,6 +16,7 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
     <link rel="stylesheet" href="../css/catalogo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="../img/iconpet.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dosis&family=Montserrat:wght@100;200&display=swap"
         rel="stylesheet">
@@ -65,13 +66,20 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
         echo "<div class='card-container'>";
         include '../php/conexao.php';
 
-        $sql = "SELECT p.id, p.nome_produto, p.descricao, p.preco, p.imagem_nome_uniq, v.nomeemp, hd.data_agendamento
+        $sql = "SELECT 
+            p.id, 
+            p.nome_produto, 
+            p.descricao, 
+            p.preco, 
+            p.imagem_nome_uniq, 
+            v.nomeemp, 
+            MAX(hd.data_agendamento) as data_agendamento
         FROM produtos p
         INNER JOIN horarios_disponiveis hd ON p.id = hd.id_produto
         INNER JOIN vendedor v ON p.cod_vendedor = v.cod
         WHERE hd.status = 'D'
-        GROUP BY p.id
-        ORDER BY hd.data_agendamento DESC";
+        GROUP BY p.id, p.nome_produto, p.descricao, p.preco, p.imagem_nome_uniq, v.nomeemp
+        ORDER BY data_agendamento DESC";
 
         $result = $conn->query($sql);
 

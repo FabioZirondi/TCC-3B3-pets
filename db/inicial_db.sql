@@ -55,7 +55,7 @@ CREATE TABLE agendamentos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT,
     id_produto INT,
-    data_agendamento int,
+    data_agendamento varchar(20),
     horario TIME,
     status CHAR(1),
     id_vendedor int,

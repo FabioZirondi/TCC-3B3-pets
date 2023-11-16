@@ -100,10 +100,7 @@ $result_produtos = $sql_produtos->get_result();
             </div>
             <div class="container_obj">
                 <p>Nossos objetivos</p>
-                <h3>Desde 2000, o(a) Colabs tem fornecido suprimentos para animais de estimação, materiais educativos,
-                    acesso aos criadores e outros produtos e serviços de primeira linha na região de São Paulo . A
-                    alegria e satisfação de ver donos de animais de estimação com seus bichinhos é verdadeiramente
-                    gratificante.</h3>
+                <h3>Somos a solução perfeita para quem ama seus pets. No PetVitrine, conectamos apaixonados por animais aos melhores serviços oferecidos pelos pet shops mais confiáveis. Com agendamento fácil e rápido, garantimos conveniência para você cuidar do seu companheiro peludo. Nosso compromisso é simplificar a vida dos tutores, proporcionando serviços de qualidade para o bem-estar do seu pet.</h3>
             </div>
         </div>
     </main>

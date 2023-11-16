@@ -94,7 +94,6 @@ if (isset($id_produto)) {
         <div class="topnav" id="myTopnav">
             <a href="../index.php" class="active">PetVitrine</a>
             <a href="../php/logout.php"><button class="button" type="button">Sair</button></a>
-            <a href="#sobre">Sobre</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <i class="fa fa-bars"></i>
             </a>
@@ -145,6 +144,15 @@ if (isset($id_produto)) {
         </div>
     </main>
     <footer>
+    <h1>PetVitrine</h1>
+        <p>petvitrine@gmail.com</p>
+        <div class="social-icons">
+            <a href="https://pt-br.facebook.com/"><img src="../img/icon-facebook.png" alt="Facebook"></a>
+            <a href="https://twitter.com/"><img src="../img/icon-twitter.png" alt="Twitter"></a>
+            <a href="https://br.linkedin.com/"><img src="../img/icon-linkedin.png" alt="LinkedIn"></a>
+            <a href="https://web.telegram.org/a/"><img src="../img/icon-telegram.png" alt="Telegram"></a>
+        </div>
+        <p>&copy; 2023. Todos os direitos reservados.</p>
     </footer>
 </body>
 </html>

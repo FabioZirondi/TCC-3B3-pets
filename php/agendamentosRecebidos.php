@@ -43,7 +43,6 @@ $result_agendamentos = $sql_agendamentos->get_result();
             <a href="../index.php" class="active">PetVitrine</a>
             <a href="../php/logout.php"> <button class="button" type="button">Sair</button></a>
             <a href="../php/catalogo.php">Catálogo</a>
-            <a href="#sobre">Sobre</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <i class="fa fa-bars"></i>
             </a>
@@ -76,12 +75,11 @@ $result_agendamentos = $sql_agendamentos->get_result();
                 echo "</tr>";
             }
             ?>
-            
         </table>
     </main>
     <footer>
-        <h1>I-Pet</h1>
-        <p>I-pet@gmail.com</p>
+    <h1>PetVitrine</h1>
+        <p>petvitrine@gmail.com</p>
         <div class="social-icons">
             <a href="https://pt-br.facebook.com/"><img src="../img/icon-facebook.png" alt="Facebook"></a>
             <a href="https://twitter.com/"><img src="../img/icon-twitter.png" alt="Twitter"></a>

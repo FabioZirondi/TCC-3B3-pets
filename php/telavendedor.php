@@ -101,8 +101,8 @@ if (!$result) {
     </main>
     <footer>
         <footer>
-            <h1>I-Pet</h1>
-            <p>I-pet@gmail.com</p>
+        <h1>PetVitrine</h1>
+        <p>petvitrine@gmail.com</p>
             <div class="social-icons">
                 <a href="https://pt-br.facebook.com/"><img src="../img/icon-facebook.png" alt="Facebook"></a>
                 <a href="https://twitter.com/"><img src="../img/icon-twitter.png" alt="Twitter"></a>

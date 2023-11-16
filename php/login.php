@@ -30,7 +30,6 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
         <div class="topnav" id="myTopnav">
             <a href="../index.php" class="active">PetVitrine</a>
             <a href="../php/cadastrohtml.php"> <button class="button" type="button">Cadastro</button></a>
-            <a href="#sobre">Sobre</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <i class="fa fa-bars"></i>
             </a>
@@ -46,8 +45,7 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
 
             <div class="img-form">
                 <div class="cadastrese">
-                    <h1>Login</h1>
-                    <p>oi, teste login </p>
+                    
                 </div>
             </div>
 
@@ -88,8 +86,8 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
     <!-- Rodapé -->
 
     <footer>
-        <h1>I-Pet</h1>
-        <p>I-pet@gmail.com</p>
+    <h1>PetVitrine</h1>
+        <p>petvitrine@gmail.com</p>
         <div class="social-icons">
             <a href="https://pt-br.facebook.com/"><img src="../img/icon-facebook.png" alt="Facebook"></a>
             <a href="https://twitter.com/"><img src="../img/icon-twitter.png" alt="Twitter"></a>

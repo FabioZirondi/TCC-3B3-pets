@@ -79,7 +79,7 @@ $result_produtos = $sql_produtos->get_result();
                         echo '<h4><b>' . $row['nome_produto'] . '</b></h4>';
                         echo '<hr>';
                         echo '<p>' . $row['data_agendamento'] . '</p>';
-                        echo '<button class="button_card" src="#">Agendar agora!</button>';
+                        echo '<a href="./php/cadastrohtml.php"><button class="button_card">Agendar agora!</button></a>';
                         echo '</div>';
                         echo '</div>';
                     }
@@ -105,8 +105,8 @@ $result_produtos = $sql_produtos->get_result();
         </div>
     </main>
     <footer>
-        <h1>I-Pet</h1>
-        <p>I-pet@gmail.com</p>
+        <h1>PetVitrine</h1>
+        <p>petvitrine@gmail.com</p>
         <div class="social-icons">
             <a href="https://pt-br.facebook.com/"><img src="./img/icon-facebook.png" alt="Facebook"></a>
             <a href="https://twitter.com/"><img src="./img/icon-twitter.png" alt="Twitter"></a>

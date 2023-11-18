@@ -13,10 +13,11 @@ $sql_produtos = $conn->prepare("SELECT
                                     v.nomeemp, 
                                     MAX(hd.data_agendamento) as data_agendamento
                                 FROM produtos p
-                                LEFT JOIN vendedor v ON p.cod_vendedor = v.cod
-                                LEFT JOIN horarios_disponiveis hd ON p.id = hd.id_produto
-                                GROUP BY p.id
-                                ORDER BY p.id DESC
+                                INNER JOIN horarios_disponiveis hd ON p.id = hd.id_produto
+                                INNER JOIN vendedor v ON p.cod_vendedor = v.cod
+                                WHERE hd.status = 'D' AND hd.data_agendamento > CURRENT_DATE
+                                GROUP BY p.id, p.nome_produto, p.descricao, p.preco, p.imagem_nome_uniq, v.nomeemp
+                                ORDER BY data_agendamento DESC
                                 LIMIT 3");
 $sql_produtos->execute();
 
@@ -100,7 +101,10 @@ $result_produtos = $sql_produtos->get_result();
             </div>
             <div class="container_obj">
                 <p>Nossos objetivos</p>
-                <h3>Somos a solução perfeita para quem ama seus pets. No PetVitrine, conectamos apaixonados por animais aos melhores serviços oferecidos pelos pet shops mais confiáveis. Com agendamento fácil e rápido, garantimos conveniência para você cuidar do seu companheiro peludo. Nosso compromisso é simplificar a vida dos tutores, proporcionando serviços de qualidade para o bem-estar do seu pet.</h3>
+                <h3>Somos a solução perfeita para quem ama seus pets. No PetVitrine, conectamos apaixonados por animais
+                    aos melhores serviços oferecidos pelos pet shops mais confiáveis. Com agendamento fácil e rápido,
+                    garantimos conveniência para você cuidar do seu companheiro peludo. Nosso compromisso é simplificar
+                    a vida dos tutores, proporcionando serviços de qualidade para o bem-estar do seu pet.</h3>
             </div>
         </div>
     </main>

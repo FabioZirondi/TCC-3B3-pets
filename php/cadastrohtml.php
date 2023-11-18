@@ -37,7 +37,6 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
         </div>
     </header>
     <main>
-
         <!-- parte principal -->
 
         <div class="container-geral">
@@ -45,7 +44,8 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
             <!-- Imagem -->
 
             <div class="img-form">
-                
+                <div class="cadastrese">
+                </div>
             </div>
 
             <!-- Formulário -->
@@ -63,11 +63,11 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
                     <input type="email" placeholder="Email" name="email" id="email" required>
 
                     <label for="telefone"><b>Telefone</b></label>
-                    <input type="text" id="cad-tel" name="numero" placeholder="+55 (xx) xxxxx-xxxx" >
-                    
+                    <input type="text" id="cad-tel" name="numero" placeholder="+55 (xx) xxxxx-xxxx">
+
                     <label for="senha"><b>Senha</b></label>
                     <input type="password" placeholder="Senha" name="senha" id="senha" minlength="8" required>
-                    
+
 
                     <input class="checkbox" type="checkbox" id="vendedor" name="vendedor" value="v">
                     <label for="">Cadastro para vendedores</label>
@@ -77,20 +77,20 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
 
 
                         <label for="nomeemp"><b>Nome da sua empresa</b></label>
-                        <input type="text" placeholder="Empresa" name="nomeemp" id="nomeemp" >
+                        <input type="text" placeholder="Empresa" name="nomeemp" id="nomeemp">
 
                         <label for="cnpj"><b>CNPJ</b></label>
                         <input type="text" id="cnpj" placeholder="XX.XXX.XXX/0001-XX." name="cnpj" id="cnpj">
                     </div>
                     <hr>
-                    <button type="submit" class="registerbtn">Register</button>
+                    <button type="submit" class="registerbtn">Enviar</button>
                     <div class="mensagemerro">
-                    <?php 
-                    
-                    if (isset($erro)) {
-                        echo "<p><b>" . $erro . "</b></p>";
-                    }
-                    ?>
+                        <?php
+
+                        if (isset($erro)) {
+                            echo "<p><b>" . $erro . "</b></p>";
+                        }
+                        ?>
                     </div>
                     <p>já possuí conta? <a href="../php/login.php">Login</a>.</p>
                 </form>
@@ -109,7 +109,7 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
     <!-- Rodapé -->
 
     <footer>
-    <h1>PetVitrine</h1>
+        <h1>PetVitrine</h1>
         <p>petvitrine@gmail.com</p>
         <div class="social-icons">
             <a href="https://pt-br.facebook.com/"><img src="../img/icon-facebook.png" alt="Facebook"></a>

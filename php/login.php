@@ -45,7 +45,6 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
 
             <div class="img-form">
                 <div class="cadastrese">
-                    
                 </div>
             </div>
 

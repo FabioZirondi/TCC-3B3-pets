@@ -8,6 +8,7 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,6 +24,7 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
     <title>Catálogo</title>
 </head>
 <script src="../js/HomePage.js"></script>
+
 <body>
     <header>
         <div class="topnav" id="myTopnav">
@@ -67,19 +69,19 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
         include '../php/conexao.php';
 
         $sql = "SELECT 
-            p.id, 
-            p.nome_produto, 
-            p.descricao, 
-            p.preco, 
-            p.imagem_nome_uniq, 
-            v.nomeemp, 
-            MAX(hd.data_agendamento) as data_agendamento
-        FROM produtos p
-        INNER JOIN horarios_disponiveis hd ON p.id = hd.id_produto
-        INNER JOIN vendedor v ON p.cod_vendedor = v.cod
-        WHERE hd.status = 'D'
-        GROUP BY p.id, p.nome_produto, p.descricao, p.preco, p.imagem_nome_uniq, v.nomeemp
-        ORDER BY data_agendamento DESC";
+        p.id, 
+        p.nome_produto, 
+        p.descricao, 
+        p.preco, 
+        p.imagem_nome_uniq, 
+        v.nomeemp, 
+        hd.data_agendamento
+    FROM produtos p
+    INNER JOIN horarios_disponiveis hd ON p.id = hd.id_produto
+    INNER JOIN vendedor v ON p.cod_vendedor = v.cod
+    WHERE hd.status = 'D'
+    GROUP BY p.id, p.nome_produto, p.descricao, p.preco, p.imagem_nome_uniq, v.nomeemp, hd.data_agendamento
+    ORDER BY hd.data_agendamento DESC";
 
         $result = $conn->query($sql);
 
@@ -91,7 +93,8 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
                     echo "<h2>{$row['nome_produto']}</h2>";
                     echo "<h4>{$row['descricao']}</h4>";
                     echo "<h4>empresa: {$row['nomeemp']}</h4>";
-                    echo "<p class='preco'>R$ {$row['preco']}</p>";
+                    echo "<h4>Data: {$row['data_agendamento']}</h4>";
+                    echo "<h3 class='preco'>R$ {$row['preco']}</h3>";
                     echo "<h4 style='color: red;'><b>Apenas para usuários</b></h4>";
                     echo "</form>";
                     echo "</div>";
@@ -102,7 +105,8 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
                     echo "<h4>{$row['descricao']}</h4>";
                     echo "<h4> empresa </h4>";
                     echo "<h4>{$row['nomeemp']}</h4>";
-                    echo "<p class='preco'>R$ {$row['preco']}</p>";
+                    echo "<h4>Data: {$row['data_agendamento']}</h4>";
+                    echo "<h3 class='preco'>R$ {$row['preco']}</h3>";
                     echo "<form action='../php/agendahtml.php' method='POST'>";
                     echo "<input type='hidden' name='id_produto' value='" . $row['id'] . "'>";
                     echo "<button class='button_catalogo' type='submit'>Agendar</button>";
@@ -120,8 +124,8 @@ $erro = isset($_GET['erro']) ? urldecode($_GET['erro']) : '';
     </main>
     <footer>
         <footer>
-        <h1>PetVitrine</h1>
-        <p>petvitrine@gmail.com</p>
+            <h1>PetVitrine</h1>
+            <p>petvitrine@gmail.com</p>
             <div class="social-icons">
                 <a href="https://pt-br.facebook.com/"><img src="../img/icon-facebook.png" alt="Facebook"></a>
                 <a href="https://twitter.com/"><img src="../img/icon-twitter.png" alt="Twitter"></a>

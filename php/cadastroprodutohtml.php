@@ -28,7 +28,8 @@ $sucesso = isset($_GET['sucesso']) ? urldecode($_GET['sucesso']) : '';
         <div class="topnav" id="myTopnav">
             <a href="../index.php" class="active">PetVitrine</a>
             <a href="../php/logout.php"> <button class="button" type="button">Sair</button></a>
-            <a href="../php/telavendedor.php">Serviços</a>
+            <a href="../php/telavendedor.php">Tela vendedor</a>
+            <a href="../php/catalogo.php">Catálogo</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <i class="fa fa-bars"></i>
             </a>

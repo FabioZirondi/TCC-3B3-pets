@@ -5,20 +5,20 @@ include_once("./php/conexao.php");
 
 // Consulta para obter os 3 últimos agendamentos
 $sql_produtos = $conn->prepare("SELECT 
-                                    p.id, 
-                                    p.nome_produto, 
-                                    p.descricao, 
-                                    p.preco, 
-                                    p.imagem_nome_uniq, 
-                                    v.nomeemp, 
-                                    MAX(hd.data_agendamento) as data_agendamento
-                                FROM produtos p
-                                INNER JOIN horarios_disponiveis hd ON p.id = hd.id_produto
-                                INNER JOIN vendedor v ON p.cod_vendedor = v.cod
-                                WHERE hd.status = 'D' AND hd.data_agendamento > CURRENT_DATE
-                                GROUP BY p.id, p.nome_produto, p.descricao, p.preco, p.imagem_nome_uniq, v.nomeemp
-                                ORDER BY data_agendamento DESC
-                                LIMIT 3");
+                                p.id, 
+                                p.nome_produto, 
+                                p.descricao, 
+                                p.preco, 
+                                p.imagem_nome_uniq, 
+                                v.nomeemp, 
+                                hd.data_agendamento
+                            FROM produtos p
+                            INNER JOIN horarios_disponiveis hd ON p.id = hd.id_produto
+                            INNER JOIN vendedor v ON p.cod_vendedor = v.cod
+                            WHERE hd.status = 'D'
+                            GROUP BY p.id, p.nome_produto, p.descricao, p.preco, p.imagem_nome_uniq, v.nomeemp
+                            ORDER BY hd.data_agendamento DESC
+                            LIMIT 3;");
 $sql_produtos->execute();
 
 $result_produtos = $sql_produtos->get_result();

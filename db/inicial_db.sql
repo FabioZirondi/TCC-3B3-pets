@@ -36,7 +36,7 @@ CREATE TABLE produtos (
     CONSTRAINT fk_email_vendedor
         FOREIGN KEY (email)
         REFERENCES vendedor (email)
-) AUTO_INCREMENT = 2000001;;
+) AUTO_INCREMENT = 2000001;
 
 CREATE TABLE horarios_disponiveis (
     id INT AUTO_INCREMENT PRIMARY KEY,
